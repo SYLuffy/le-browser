@@ -1,0 +1,82 @@
+PODS:
+  - AFNetworking (4.0.1):
+    - AFNetworking/NSURLSession (= 4.0.1)
+    - AFNetworking/Reachability (= 4.0.1)
+    - AFNetworking/Security (= 4.0.1)
+    - AFNetworking/Serialization (= 4.0.1)
+    - AFNetworking/UIKit (= 4.0.1)
+  - AFNetworking/NSURLSession (4.0.1):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (4.0.1)
+  - AFNetworking/Security (4.0.1)
+  - AFNetworking/Serialization (4.0.1)
+  - AFNetworking/UIKit (4.0.1):
+    - AFNetworking/NSURLSession
+  - CocoaAsyncSocket (7.6.5)
+  - CocoaLumberjack (3.8.5):
+    - CocoaLumberjack/Core (= 3.8.5)
+  - CocoaLumberjack/Core (3.8.5)
+  - Masonry (1.1.0)
+  - PacketProcessor_iOS (0.0.1)
+  - ReachabilitySwift (5.2.1)
+  - ShadowSocks-libev-iOS (3.2.5):
+    - ShadowSocks-libev-iOS/c-ares (= 3.2.5)
+    - ShadowSocks-libev-iOS/libbloom (= 3.2.5)
+    - ShadowSocks-libev-iOS/libcork (= 3.2.5)
+    - ShadowSocks-libev-iOS/libev (= 3.2.5)
+    - ShadowSocks-libev-iOS/libipset (= 3.2.5)
+    - ShadowSocks-libev-iOS/mbedtls (= 3.2.5)
+    - ShadowSocks-libev-iOS/pcre (= 3.2.5)
+    - ShadowSocks-libev-iOS/sodium (= 3.2.5)
+  - ShadowSocks-libev-iOS/c-ares (3.2.5)
+  - ShadowSocks-libev-iOS/libbloom (3.2.5)
+  - ShadowSocks-libev-iOS/libcork (3.2.5)
+  - ShadowSocks-libev-iOS/libev (3.2.5)
+  - ShadowSocks-libev-iOS/libipset (3.2.5):
+    - ShadowSocks-libev-iOS/libcork
+  - ShadowSocks-libev-iOS/mbedtls (3.2.5)
+  - ShadowSocks-libev-iOS/pcre (3.2.5)
+  - ShadowSocks-libev-iOS/sodium (3.2.5)
+
+DEPENDENCIES:
+  - AFNetworking
+  - CocoaAsyncSocket
+  - CocoaLumberjack
+  - Masonry (>= 1.1.0)
+  - PacketProcessor_iOS
+  - ReachabilitySwift
+  - "ShadowSocks-libev-iOS (from `git@github.com:juvham/ShadowSocks-libev-iOS.git`, tag `master`)"
+
+SPEC REPOS:
+  trunk:
+    - AFNetworking
+    - CocoaAsyncSocket
+    - CocoaLumberjack
+    - Masonry
+    - PacketProcessor_iOS
+    - ReachabilitySwift
+
+EXTERNAL SOURCES:
+  ShadowSocks-libev-iOS:
+    :git: "git@github.com:juvham/ShadowSocks-libev-iOS.git"
+    :tag: master
+
+CHECKOUT OPTIONS:
+  ShadowSocks-libev-iOS:
+    :git: "git@github.com:juvham/ShadowSocks-libev-iOS.git"
+    :tag: master
+
+SPEC CHECKSUMS:
+  AFNetworking: 3bd23d814e976cd148d7d44c3ab78017b744cd58
+  CocoaAsyncSocket: 065fd1e645c7abab64f7a6a2007a48038fdc6a99
+  CocoaLumberjack: 6a459bc897d6d80bd1b8c78482ec7ad05dffc3f0
+  Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
+  PacketProcessor_iOS: de7d72fe740674733f2fcf981efcb5a8bfaaa351
+  ReachabilitySwift: 5ae15e16814b5f9ef568963fb2c87aeb49158c66
+  ShadowSocks-libev-iOS: 14f635962b69527b58af96e139a6b4b63ec4bf25
+
+PODFILE CHECKSUM: 98e734eac5e28047f59ac054b285f85385f07204
+
+COCOAPODS: 1.15.2

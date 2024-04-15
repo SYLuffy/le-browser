@@ -1,0 +1,33 @@
+//
+//  PrefixHeader.pch
+//  Lettuce Browser
+//
+//  Created by shen on 2024/4/3.
+//
+
+#ifndef LBPrefixHeader_pch
+#define LBPrefixHeader_pch
+
+#import <Masonry/Masonry.h>
+#import "LBScreenAdapter.h"
+#import "UIColor+LBHex.h"
+#import "LBToast.h"
+#import "NSObject+JJCController.h"
+#import "LBAppManagerCenter.h"
+#import "UIView+Util.h"
+#import "LBWebPageTabManager.h"
+#import "LBVpnUtil.h"
+
+
+static NSString * const kReconnectionVpnNoti = @"kReconnectionVpnNoti";
+static NSString * lb_providerBundleIdentifier = @"com.darkios.lettucebrowser.sy.proxy";
+
+#ifdef DEBUG
+#define LBDebugLog(message) NSLog(@"类名:%@ \n 方法名%@ \n 代码行数:%d \n输出信息:%@", NSStringFromClass([self class]), NSStringFromSelector(_cmd), __LINE__, (message))
+#else
+#define LBDebugLog(message) NSLog(@"%@",message)
+#endif
+
+
+
+#endif /* PrefixHeader_pch */
