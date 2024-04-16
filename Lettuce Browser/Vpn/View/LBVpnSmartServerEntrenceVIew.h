@@ -19,6 +19,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, weak) id <SmartServerEntrenceProtocol> delegate;
 
+- (void)updateCurrentVpnModel;
+
 @end
 
 NS_ASSUME_NONNULL_END

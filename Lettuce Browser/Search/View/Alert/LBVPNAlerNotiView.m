@@ -104,7 +104,7 @@
 
 - (void)configmClicked:(UIButton *)sender {
     [self dismiss];
-    LBVpnViewController * vpnVc = [LBVpnViewController new];
+    LBVpnViewController * vpnVc = [[LBVpnViewController alloc] initWithNeedStartConnect:YES];
     vpnVc.modalPresentationStyle = UIModalPresentationFullScreen;
     [[self jjc_getCurrentUIVC] presentViewController:vpnVc animated:YES completion:nil];
 }

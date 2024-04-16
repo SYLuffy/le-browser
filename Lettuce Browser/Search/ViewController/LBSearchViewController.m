@@ -33,6 +33,8 @@
 @property (nonatomic, assign)LBHomeStartMode currentStartMode;
 @property (nonatomic, strong)LBVPNEntranceView * vpnEntranceView;
 @property (nonatomic, strong)UIButton * fullScrennButton;
+@property (nonatomic, assign)BOOL isLoadFinishPage;
+@property (nonatomic, strong)NSString * lastWebUrl;
 
 @end
 
@@ -171,8 +173,10 @@
     
     self.searchTopView.cleanInputBlock = ^{
        __strong typeof(weakSelf) strongSelf = weakSelf;
+        if (strongSelf.webView.isLoading) {
+            strongSelf.currentUrl = strongSelf.lastWebUrl?strongSelf.lastWebUrl:@"";
+        }
         [strongSelf.webView stopLoading];
-        [strongSelf showWebView:NO];
     };
     
     self.searchTopView.searchInputBlock = ^(NSString * _Nonnull inputString) {
@@ -238,7 +242,11 @@
 
 - (void)loadFromModel {
     if (self.currentModel.url && self.currentModel.url.length > 0) {
-        [self loadUrlString:self.currentModel.url];
+        if ([self.currentModel.url isEqualToString:@"empty"]) {
+            [self showWebView:YES];
+        }else {
+            [self loadUrlString:self.currentModel.url];
+        }
     }
 }
 
@@ -249,6 +257,7 @@
     }
     NSURL * url = [NSURL URLWithString:urlString];
     if (url) {
+        self.lastWebUrl = self.currentUrl;
         self.currentUrl = urlString;
         [self.searchTopView updateInputUrl:urlString];
         NSURLRequest * urlRequest = [NSURLRequest requestWithURL:url];
@@ -303,6 +312,9 @@
 - (void)updateTabModelContent {
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         self.currentModel.url = self.currentUrl;
+        if (!self.isLoadFinishPage) {
+            self.currentModel.url = @"empty";
+        }
         self.currentModel.screenShot = [self.contentView takeScreenshot];
         [[LBWebPageTabManager shareInstance] updateTabModel:self.currentModel];
     });
@@ -318,11 +330,19 @@
 - (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation {
     [self.bottomToolbar updateToolBarState:webView];
     [self.searchTopView updateWebviewLoading:webView];
+    if (webView.loading && webView.URL) {
+        NSString * urlString = webView.URL.absoluteString;
+        if (urlString) {
+            self.lastWebUrl = self.currentUrl;
+            self.currentUrl = urlString;
+        }
+    }
 }
     
 - (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation {
     [self.bottomToolbar updateToolBarState:webView];
     self.coverLoadingView.hidden = YES;
+    self.isLoadFinishPage = YES;
     [self.searchTopView updateWebviewLoading:webView];
 }
 

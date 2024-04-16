@@ -52,7 +52,7 @@
     
     [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.mas_left).offset(LBAdapterHeight(16));
-        make.right.mas_equalTo(self.mas_right).offset(LBAdapterHeight(-16));
+        make.right.mas_equalTo(self.mas_right);
         make.top.mas_equalTo(self.mas_top).offset(LBAdapterHeight(64));
         make.bottom.mas_equalTo(self.mas_bottom).offset(LBAdapterHeight(-81));
     }];
@@ -145,7 +145,7 @@
         layout.minimumInteritemSpacing = 0;
         layout.minimumLineSpacing = 0;
         layout.sectionInset = UIEdgeInsetsZero;
-        layout.itemSize = CGSizeMake(LBAdapterHeight(180), LBAdapterHeight(216));
+        layout.itemSize = CGSizeMake(LBAdapterHeight(179), LBAdapterHeight(216));
         
         _collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
         _collectionView.dataSource = self;
@@ -160,6 +160,7 @@
     if (!_backButton) {
         _backButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [_backButton setTitle:@"Back" forState:UIControlStateNormal];
+        _backButton.titleLabel.font = [UIFont systemFontOfSize:LBAdapterHeight(13)];
         [_backButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [_backButton addTarget:self action:@selector(backClicked:) forControlEvents:UIControlEventTouchUpInside];
     }

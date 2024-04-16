@@ -41,11 +41,11 @@ static LBVpnUtil * vpnUtil = nil;
     if (self.manager) {
         if ([self.manager.connection isKindOfClass:[NETunnelProviderSession class]]) {
             NETunnelProviderSession * session = (NETunnelProviderSession *)self.manager.connection;
-            if (!self.connectedEver && session.status != LBVpnStateDisconneced) {
-                NSString * logInfo = [NSString stringWithFormat:@"[VPN MANAGER] not connected yet, but status is (%ld)",(long)session.status];
-                LBDebugLog(logInfo);
-                return;
-            }
+//            if (!self.connectedEver && session.status != LBVpnStateDisconneced) {
+//                NSString * logInfo = [NSString stringWithFormat:@"[VPN MANAGER] not connected yet, but status is (%ld)",(long)session.status];
+//                LBDebugLog(logInfo);
+//                return;
+//            }
             switch (session.status) {
                 case NEVPNStatusConnecting:
                     LBDebugLog(@"NEVPNStatusConnecting");
@@ -54,6 +54,7 @@ static LBVpnUtil * vpnUtil = nil;
                 case NEVPNStatusConnected:
                     LBDebugLog(@"NEVPNStatusConnected");
                     self.vpnState = LBVpnStateConnected;
+                    [[LBAppManagerCenter shareInstance] saveCurrentVpnInfo];
                     break;
                 case NEVPNStatusDisconnecting:
                     LBDebugLog(@"NEVPNStatusDisconnecting");
@@ -67,6 +68,8 @@ static LBVpnUtil * vpnUtil = nil;
                     }else {
                         [LBAppManagerCenter shareInstance].isShowDisconnectedVC = YES;
                     }
+                    [[LBAppManagerCenter shareInstance] stopVpnKeepTime];
+                    [[LBAppManagerCenter shareInstance] cleanCurrentVpnInfo];
                     break;
                 case NEVPNStatusInvalid:
                     LBDebugLog(@"NEVPNStatusInvalid");
@@ -151,6 +154,13 @@ static LBVpnUtil * vpnUtil = nil;
     }
 }
 
+- (NSDate *)getCurrentConnectedTime {
+    if (self.vpnState == LBVpnStateConnected) {
+        return self.manager.connection.connectedDate;
+    }
+    return nil;
+}
+
 #pragma mark - vpnManager
 
 - (void)createWithCompletionHandler:(void (^)(NSError *error))completionHandler {
@@ -227,6 +237,7 @@ static LBVpnUtil * vpnUtil = nil;
             self.manager = manager;
             self.managerState = LBVpnManagerStateReady;
             [self addVPNStatusDidChangeObserver];
+            [self updateVPNStatus];
             if (completionHandler != nil) {
                 completionHandler(nil);
             }

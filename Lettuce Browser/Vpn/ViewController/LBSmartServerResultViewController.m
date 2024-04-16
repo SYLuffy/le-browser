@@ -84,6 +84,9 @@
 
 - (void)addVpnKeepTimeObserver {
     [[LBAppManagerCenter shareInstance] addObserver:self forKeyPath:@"vpnKeepTime" options:NSKeyValueObservingOptionNew context:nil];
+    if (self.smartType == LBSmartTypeFailed) {
+        self.timeLabel.text = [[LBAppManagerCenter shareInstance] formatTime:[LBAppManagerCenter shareInstance].lastVpnKeepTime];
+    }
 }
 
 - (void)removeVpnKeepTimeObserver {
@@ -91,7 +94,9 @@
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(LBAppManagerCenter *)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
-    self.timeLabel.text = [object formatTime:object.vpnKeepTime];
+    if (self.smartType == LBSmartTypeSuccessed) {
+        self.timeLabel.text = [object formatTime:object.vpnKeepTime];
+    }
 }
 
 

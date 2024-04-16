@@ -7,12 +7,13 @@
 
 #import "LBVpnSmartServerEntrenceVIew.h"
 #import "LBSmartServerViewController.h"
+#import "LBVpnModel.h"
 
 @interface LBVpnSmartServerEntrenceVIew ()
 
 @property (nonatomic, strong) UIImageView *bgView;
 @property (nonatomic, strong) UIImageView *iconView;
-@property (nonatomic, strong) UIImageView *titleImgView;
+@property (nonatomic, strong) UILabel  *titleLabel;
 @property (nonatomic, strong) UIImageView *arrowImgView;
 
 @end
@@ -32,7 +33,7 @@
     [self addGestureRecognizer:tapGesture];
     [self addSubview:self.bgView];
     [self.bgView addSubview:self.iconView];
-    [self.bgView addSubview:self.titleImgView];
+    [self.bgView addSubview:self.titleLabel];
     [self.bgView addSubview:self.arrowImgView];
     
     [self.bgView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -45,10 +46,10 @@
         make.left.mas_equalTo(self.bgView.mas_left).offset(LBAdapterHeight(20));
     }];
     
-    [self.titleImgView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.iconView.mas_right).offset(LBAdapterHeight(12));
-        make.width.mas_equalTo(LBAdapterHeight(85));
-        make.height.mas_equalTo(LBAdapterHeight(11));
+        make.right.mas_equalTo(self.mas_right).offset(LBAdapterHeight(-40));
+        make.height.mas_equalTo(LBAdapterHeight(15));
         make.centerY.mas_equalTo(self.mas_centerY);
     }];
     
@@ -69,6 +70,11 @@
     }
 }
 
+- (void)updateCurrentVpnModel {
+    self.iconView.image = [UIImage imageNamed:[LBAppManagerCenter shareInstance].currentVpnModel.iconName];
+    self.titleLabel.text = [LBAppManagerCenter shareInstance].currentVpnModel.titleName;
+}
+
 #pragma mark - Getter
 
 - (UIImageView *)bgView {
@@ -87,12 +93,14 @@
     return _iconView;
 }
 
-- (UIImageView *)titleImgView {
-    if (!_titleImgView) {
-        _titleImgView = [[UIImageView alloc] init];
-        _titleImgView.image = [UIImage imageNamed:@"vpn_smartserver_entrenctitle"];
+- (UILabel *)titleLabel {
+    if (!_titleLabel) {
+        _titleLabel = [[UILabel alloc]init];
+        _titleLabel.textColor = [UIColor LB_colorWithHex:0xff525050];
+        _titleLabel.font = [UIFont systemFontOfSize:14];
+        _titleLabel.text = @"Smart Server";
     }
-    return _titleImgView;
+    return _titleLabel;
 }
 
 - (UIImageView *)arrowImgView {

@@ -84,6 +84,10 @@
     }];
 }
 
+- (BOOL)currentInputContent {
+    return self.searchTextFiled.text.length > 0?YES:NO;
+}
+
 /// 圆角
 - (void)cornerRadiusBottom {
     CGFloat cornerRadius = LBAdapterHeight(32);

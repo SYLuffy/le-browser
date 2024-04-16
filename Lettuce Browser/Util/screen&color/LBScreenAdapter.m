@@ -19,19 +19,13 @@
 }
 
 + (CGFloat)adapterWidthWithValue:(CGFloat)floatV {
-    CGFloat width = kLBPlusRefereWidth;
-    if (kLBIsIphoneX) {
-        width = kLBRefereWidth;
-    }
+    CGFloat width = kLBRefereWidth;
     return  roundf(floatV*kLBDeviceWidth/width);
 }
 
 + (CGFloat)adapterHeightWithValue:(CGFloat)floatV {
-    CGFloat width = kLBPlusRefereHeight;
-    if (kLBIsIphoneX) {
-        width = kLBReferHeight;
-    }
-    return  roundf(floatV*kLBReferHeight/width);
+    CGFloat height = kLBReferHeight;
+    return  roundf(floatV*kLBDeviceHeight/height);
 }
 
 @end

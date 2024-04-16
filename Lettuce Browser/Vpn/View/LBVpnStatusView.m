@@ -28,6 +28,7 @@
 @property (nonatomic, assign) CGFloat progress;
 @property (nonatomic, assign) CGFloat animationNumber;
 @property (nonatomic, assign) BOOL isProcessing;
+@property (nonatomic, assign) BOOL isReConnect;
  
 @end
 
@@ -132,7 +133,9 @@
 }
 
 - (void)reconnectVpn {
-    [self updateUI:LBVpnStatusConnecting];
+    self.vpnStatus = LBVpnStatusNormal;
+    self.isReConnect = YES;
+    [self clickEvent];
 }
 
 - (void)applicationDidEnterBackground {
@@ -268,7 +271,7 @@
 
 - (void)jumpResultVc {
     LBSmartType type = LBSmartTypeSuccessed;
-    if (self.vpnStatus == LBVpnStatusNormal) {
+    if (self.vpnStatus == LBVpnStatusDisconnecting) {
         type = LBSmartTypeFailed;
     }
     LBSmartServerResultViewController *resultVC = [[LBSmartServerResultViewController alloc] initWithSmartType:type];
@@ -321,11 +324,11 @@
                 [LBToast showMessage:@"Try it agin." duration:2.8 finishHandler:nil];
                 return;
             }
+            [self jumpResultVc];
             [self updateUI:LBVpnStatusConnected];
-            [self jumpResultVc];
         }else {
-            [self updateUI:LBVpnStatusNormal];
             [self jumpResultVc];
+            [self updateUI:LBVpnStatusNormal];
         }
     }else {
         NSInteger number = self.progress * 100;

@@ -10,6 +10,7 @@
 #import "LBVpnModel.h"
 
 static LBAppManagerCenter * aManager = nil;
+static NSString * const kSaveConnectedVpnName = @"kSaveConnectedVpnName";
 
 @interface LBAppManagerCenter ()
 
@@ -31,8 +32,19 @@ static LBAppManagerCenter * aManager = nil;
 }
 
 - (void)initData {
+    NSString * vpnTitle = [[NSUserDefaults standardUserDefaults] objectForKey:kSaveConnectedVpnName];
     self.vpnModelList = [self getVpnConfigList];
-    self.currentVpnModel = self.vpnModelList[0];
+    
+    if (vpnTitle && vpnTitle.length > 0) {
+        for (LBVpnModel * model in self.vpnModelList) {
+            if ([vpnTitle isEqualToString:model.titleName]) {
+                self.currentVpnModel = model;
+            }
+        }
+    }else {
+        self.currentVpnModel = self.vpnModelList[0];
+    }
+    
 }
 
 ///网络检测
@@ -72,7 +84,7 @@ static LBAppManagerCenter * aManager = nil;
     ///,@"Germany",@"France",@"Japan",@"Australia",@"Singapore"
     NSMutableArray * mArrays = [[NSMutableArray alloc] init];
     NSArray * iconNameArray = @[@"vpn_smart_smart",@"vpn_smart_US",@"vpn_smart_Canada"];
-    NSArray * countryArray = @[@"Fast Server",@"Unite States",@"Canada"];
+    NSArray * countryArray = @[@"Smart Server",@"Unite States",@"Canada"];
     NSArray * ipArrays = @[@"104.237.128.93",@"195.88.24.218",@"104.237.128.93"];
     for (int i = 0; i < iconNameArray.count; i ++) {
         NSString * imageName = iconNameArray[i];
@@ -122,7 +134,22 @@ static LBAppManagerCenter * aManager = nil;
         dispatch_source_cancel(_timer);
         _timer = nil;
     }
+    self.lastVpnKeepTime = self.vpnKeepTime;
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        self.vpnKeepTime = 0;
+    });
 }
+
+- (void)saveCurrentVpnInfo {
+    [[NSUserDefaults standardUserDefaults] setObject:self.currentVpnModel.titleName forKey:kSaveConnectedVpnName];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (void)cleanCurrentVpnInfo {
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:kSaveConnectedVpnName];
+}
+
+#pragma mark - Getter
 
 - (NSMutableArray *)vpnModelList {
     if (!_vpnModelList) {

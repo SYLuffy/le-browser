@@ -15,10 +15,28 @@
 @property (nonatomic, strong)UIImageView * iconImgView;
 @property (nonatomic, strong)LBVpnSmartServerEntrenceVIew * smartServerEntrenceView;
 @property (nonatomic, strong)LBVpnStatusView * vpnStatusView;
+@property (nonatomic, assign)BOOL isStartConnect;
 
 @end
 
 @implementation LBVpnViewController
+
+- (instancetype)initWithNeedStartConnect:(BOOL)isStartConnect {
+    self = [super init];
+    if (self) {
+        self.isStartConnect = isStartConnect;
+    }
+    return self;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self.smartServerEntrenceView updateCurrentVpnModel];
+    if (self.isStartConnect) {
+        self.isStartConnect = NO;
+        [self.vpnStatusView clickEvent];
+    }
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -109,6 +127,6 @@
         _vpnStatusView = [[LBVpnStatusView alloc] initWithVpnStatus:[LBVpnUtil shareInstance].vpnState == LBVpnStateConnected?LBVpnStatusConnected:LBVpnStatusNormal];
     }
     return _vpnStatusView;
-}
+}  
 
 @end

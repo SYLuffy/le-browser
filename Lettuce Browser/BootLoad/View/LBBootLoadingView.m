@@ -125,7 +125,18 @@
     }completion:^(BOOL finished) {
         [weakSelf removeFromSuperview];
         if (weakSelf.loadingMode == LBLoadingModeColdBoot) {
-            [LBVPNAlerNotiView showWithSuperView:nil];
+            if ([LBVpnUtil shareInstance].vpnState != LBVpnStateConnected) {
+                [LBVPNAlerNotiView showWithSuperView:nil];
+            } else {
+                NSDate * connectedDate = [[LBVpnUtil shareInstance] getCurrentConnectedTime];
+                if (connectedDate) {
+                    NSDate *currentDate = [NSDate date];
+                    NSTimeInterval timeInterval = [currentDate timeIntervalSinceDate:connectedDate];
+                    NSInteger seconds = (NSInteger)timeInterval;
+                    [LBAppManagerCenter shareInstance].vpnKeepTime = labs(seconds);
+                    [[LBAppManagerCenter shareInstance] startVpnKeepTime];
+                }
+            }
             }else {
                 if ([LBVpnUtil shareInstance].vpnState != LBVpnStateConnected) {
                     if ([LBAppManagerCenter shareInstance].isShowDisconnectedVC) {

@@ -37,6 +37,8 @@ typedef NS_ENUM(NSUInteger, LBVpnState) {
 
 + (instancetype)shareInstance;
 
+- (NSDate *)getCurrentConnectedTime;
+
 ///创建Manager（vpn配置授权）
 - (void)createWithCompletionHandler:(void (^)(NSError *error))completionHandler;
 

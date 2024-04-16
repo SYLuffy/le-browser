@@ -11,6 +11,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface LBVpnViewController : UIViewController
 
+- (instancetype)initWithNeedStartConnect:(BOOL)isStartConnect;
+
 - (void)vpnDisconnected;
 
 @end

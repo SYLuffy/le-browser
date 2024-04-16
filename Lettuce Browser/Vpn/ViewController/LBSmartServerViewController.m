@@ -93,7 +93,6 @@
             return;
         }
     }
-    [[LBVpnUtil shareInstance] stopVPN];
     [LBAppManagerCenter shareInstance].currentVpnModel = vpnModel;
     [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:kReconnectionVpnNoti object:nil];

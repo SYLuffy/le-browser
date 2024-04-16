@@ -23,6 +23,7 @@ typedef NS_ENUM(NSUInteger, LBAppNetworkStatus) {
 @property (nonatomic, strong) NSMutableArray * vpnModelList;
 /// vpn连接持续时间
 @property (nonatomic, assign) NSInteger vpnKeepTime;
+@property (nonatomic, assign) NSInteger lastVpnKeepTime;
 @property (nonatomic, strong) LBVpnModel * currentVpnModel;
 @property (nonatomic, assign) BOOL isShowDisconnectedVC;
 
@@ -35,6 +36,10 @@ typedef NS_ENUM(NSUInteger, LBAppNetworkStatus) {
 - (void)stopVpnKeepTime;
 
 - (NSString *)formatTime:(NSInteger)totalSeconds;
+
+- (void)saveCurrentVpnInfo;
+
+- (void)cleanCurrentVpnInfo;
 
 @end
 

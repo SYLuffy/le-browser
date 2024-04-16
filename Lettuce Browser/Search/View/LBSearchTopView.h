@@ -21,6 +21,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)updateProgressValue:(CGFloat)progressValue;
 
+- (BOOL)currentInputContent;
+
 - (void)textFiledEndEdit;
 
 @end

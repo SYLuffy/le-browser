@@ -24,6 +24,9 @@ typedef NS_ENUM(NSUInteger, LBVpnStatus) {
 
 - (void)updateUI:(LBVpnStatus)status;
 
+///直接开始连接
+- (void)clickEvent;
+
 @end
 
 NS_ASSUME_NONNULL_END

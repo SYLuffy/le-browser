@@ -179,12 +179,8 @@
 }
 
 - (void)openAppStoreReviewPage {
-    if (@available(iOS 10.3, *)) {
-        [SKStoreReviewController requestReview];
-    } else {
-        // 在 iOS 10.2 及更低版本上无法打开应用程序评分页面，
-        [LBToast showMessage:@"This feature is currently under development, please stay tuned ~~" duration:1.5 finishHandler:nil];
-    }
+//    NSURL *url = [NSURL URLWithString:@"itms-apps://itunes.apple.com/cn/app/xxx/idxxx?action=write-review"];
+    [LBToast showMessage:@"This feature is currently under development, please stay tuned ~~" duration:1.5 finishHandler:nil];
 }
 
 - (void)shareContent {
