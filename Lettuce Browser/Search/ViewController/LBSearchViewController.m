@@ -175,11 +175,13 @@
        __strong typeof(weakSelf) strongSelf = weakSelf;
         if (strongSelf.webView.isLoading) {
             strongSelf.currentUrl = strongSelf.lastWebUrl?strongSelf.lastWebUrl:@"";
+            [strongSelf.webView stopLoading];
         }
-        if (!strongSelf.webView.canGoBack) {
+        
+        if (!strongSelf.webView.canGoBack && !self.isLoadFinishPage) {
             [strongSelf showWebView:NO];
         }
-        [strongSelf.webView stopLoading];
+        
     };
     
     self.searchTopView.searchInputBlock = ^(NSString * _Nonnull inputString) {
@@ -362,6 +364,9 @@
     [self.bottomToolbar updateToolBarState:webView];
     [self.searchTopView updateProgressValue:0.0f];
     [self.searchTopView updateWebviewLoading:webView];
+//    if (webView.canGoBack) {
+//        [webView goBack];
+//    }
 }
 
 - (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
@@ -369,18 +374,6 @@
 }
 
 #pragma mark - WKUIDelegate
-
-// 用于修改网页背景色
-- (void)webView:(WKWebView *)webView runJavaScriptAlertPanelWithMessage:(NSString *)message initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(void))completionHandler {
-    
-    NSString *changeBgColorScript = @"document.body.style.backgroundColor = 'black';";
-    [webView evaluateJavaScript:changeBgColorScript completionHandler:^(id _Nullable result, NSError * _Nullable error) {
-        // JavaScript 执行完成后的回调
-        if (completionHandler) {
-            completionHandler();
-        }
-    }];
-}
 
 #pragma mark - Getter
 

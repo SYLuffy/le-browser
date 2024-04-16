@@ -71,6 +71,7 @@
     rotationAnimation.repeatCount = 3;
     rotationAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
     rotationAnimation.delegate = self;
+    rotationAnimation.removedOnCompletion = NO;
     
     [self.rotateImgView.layer addAnimation:rotationAnimation forKey:@"rotationAnimation"];
 }
@@ -94,6 +95,8 @@
         [self removeFromSuperview];
         [[LBWebPageTabManager shareInstance] addNewSerchVC:nil];
         [LBToast showMessage:@"Clean up successfully" duration:2 finishHandler:nil];
+    }else {
+        [self startLoadinganimation];
     }
 }
 

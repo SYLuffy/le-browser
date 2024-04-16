@@ -67,7 +67,7 @@
     [self.descLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(self.bgView);
         make.top.mas_equalTo(self.titleLabel.mas_bottom).offset(LBAdapterHeight(13));
-        make.height.mas_equalTo(LBAdapterHeight(63));
+        make.height.mas_equalTo(LBAdapterHeight(65));
     }];
     
     [self.cancelButton mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -141,6 +141,7 @@
         _descLabel.font = [UIFont systemFontOfSize:LBAdapterHeight(14)];
         _descLabel.textColor = [UIColor LB_colorWithHex:0xff757A7A];
         _descLabel.textAlignment = NSTextAlignmentCenter;
+        _descLabel.numberOfLines = 3;
         _descLabel.text = @"Your network is unprotected,\n please open your network\n protection now.";
     }
     return _descLabel;
