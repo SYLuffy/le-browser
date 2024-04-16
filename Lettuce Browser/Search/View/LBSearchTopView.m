@@ -125,6 +125,7 @@
         NSString * urlString = webView.URL.absoluteString;
         if (urlString) {
             self.searchTextFiled.text = urlString;
+            [self updateInputRightMode];
         }
     }
 }

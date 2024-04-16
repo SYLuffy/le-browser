@@ -176,6 +176,9 @@
         if (strongSelf.webView.isLoading) {
             strongSelf.currentUrl = strongSelf.lastWebUrl?strongSelf.lastWebUrl:@"";
         }
+        if (!strongSelf.webView.canGoBack) {
+            [strongSelf showWebView:NO];
+        }
         [strongSelf.webView stopLoading];
     };
     
@@ -282,8 +285,11 @@
 //        }];
 //        [self clearCurrentWebViewData:self.webView];
 //    }
-     
-    self.coverLoadingView.hidden = !isShow;
+    if (!self.isLoadFinishPage && isShow) {
+        self.coverLoadingView.hidden = NO;
+    }else {
+        self.coverLoadingView.hidden = YES;
+    }
     self.iconListView.hidden = isShow;
     self.vpnEntranceView.hidden = isShow;
     self.webView.hidden = !isShow;
@@ -312,9 +318,6 @@
 - (void)updateTabModelContent {
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         self.currentModel.url = self.currentUrl;
-        if (!self.isLoadFinishPage) {
-            self.currentModel.url = @"empty";
-        }
         self.currentModel.screenShot = [self.contentView takeScreenshot];
         [[LBWebPageTabManager shareInstance] updateTabModel:self.currentModel];
     });

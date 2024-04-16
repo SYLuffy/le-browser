@@ -133,9 +133,10 @@
 }
 
 - (void)reconnectVpn {
-    self.vpnStatus = LBVpnStatusNormal;
     self.isReConnect = YES;
-    [self clickEvent];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self clickEvent];
+    });
 }
 
 - (void)applicationDidEnterBackground {
@@ -327,8 +328,16 @@
             [self jumpResultVc];
             [self updateUI:LBVpnStatusConnected];
         }else {
-            [self jumpResultVc];
-            [self updateUI:LBVpnStatusNormal];
+            if (self.isReConnect) {
+                self.isReConnect = NO;
+                [self updateUI:LBVpnStatusNormal];
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    [self clickEvent];
+                });
+            }else {
+                [self jumpResultVc];
+                [self updateUI:LBVpnStatusNormal];
+            }
         }
     }else {
         NSInteger number = self.progress * 100;
