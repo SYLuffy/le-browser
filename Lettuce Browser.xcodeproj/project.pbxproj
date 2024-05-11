@@ -52,6 +52,7 @@
 		19D68F802BC698C10038E873 /* LBSmartServerResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19D68F7F2BC698C10038E873 /* LBSmartServerResultViewController.m */; };
 		19D68F872BC779290038E873 /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19D68F862BC779290038E873 /* NetworkExtension.framework */; };
 		19D68F902BC779290038E873 /* LBFlashVPN.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 19D68F852BC779290038E873 /* LBFlashVPN.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		313618CBA5FDC39131D9C7CA /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = FF4B2DC868D976985681D7D1 /* PrivacyInfo.xcprivacy */; };
 		BCE36096C54542D114BDE2EA /* Pods_Lettuce_Browser.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DF0B0125C9BF737CB3A38FE /* Pods_Lettuce_Browser.framework */; };
 		EB5330ED2BBEF9B1009C172F /* LBSearchBottomToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = EB5330EC2BBEF9B1009C172F /* LBSearchBottomToolbar.m */; };
 		EB5330F02BC0313E009C172F /* LBSettingPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = EB5330EF2BC0313E009C172F /* LBSettingPopView.m */; };
@@ -186,6 +187,7 @@
 		EB5330F32BC044BD009C172F /* LBSettingListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LBSettingListModel.m; sourceTree = "<group>"; };
 		EB5330F62BC045F0009C172F /* LBSettingListTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LBSettingListTableViewCell.h; sourceTree = "<group>"; };
 		EB5330F72BC045F0009C172F /* LBSettingListTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LBSettingListTableViewCell.m; sourceTree = "<group>"; };
+		FF4B2DC868D976985681D7D1 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -217,6 +219,7 @@
 				195834532BBCEC6F00078C6C /* Products */,
 				32CB1C2B0D26B39AA0881EC5 /* Pods */,
 				73B848B16FA611FF668C9251 /* Frameworks */,
+				59DBB7CDE3E79A3549996066 /* Resources */,
 			);
 			sourceTree = "<group>";
 		};
@@ -543,6 +546,15 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		59DBB7CDE3E79A3549996066 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				FF4B2DC868D976985681D7D1 /* PrivacyInfo.xcprivacy */,
+			);
+			name = Resources;
+			path = "Lettuce Browser/Resources";
+			sourceTree = "<group>";
+		};
 		73B848B16FA611FF668C9251 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -662,6 +674,7 @@
 				19AE57952BC290E500422E01 /* terms of user.rtf in Resources */,
 				19AE57932BC2879C00422E01 /* privacy policy.rtf in Resources */,
 				195834602BBCEC6F00078C6C /* Base in Resources */,
+				313618CBA5FDC39131D9C7CA /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -949,9 +962,9 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Lettuce Browser/Lettuce Browser.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 67D9SM7JC3;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Lettuce\\ Browser",
@@ -975,7 +988,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.darkios.lettucebrowser.sy;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lettucebrowser.iosyaho;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -992,9 +1005,9 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Lettuce Browser/Lettuce Browser.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 67D9SM7JC3;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Lettuce\\ Browser",
@@ -1018,7 +1031,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.darkios.lettucebrowser.sy;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lettucebrowser.iosyaho;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1032,9 +1045,9 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = LBFlashVPN/LBFlashVPN.entitlements;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 67D9SM7JC3;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Lettuce\\ Browser",
@@ -1053,6 +1066,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.darkios.lettucebrowser.sy.proxy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "LBFlashVPN/LBFlashVPN-Bridging-Header.h";
@@ -1068,9 +1082,9 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = LBFlashVPN/LBFlashVPN.entitlements;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 67D9SM7JC3;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Lettuce\\ Browser",
@@ -1089,6 +1103,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.darkios.lettucebrowser.sy.proxy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "LBFlashVPN/LBFlashVPN-Bridging-Header.h";
