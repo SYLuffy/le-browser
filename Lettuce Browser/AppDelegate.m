@@ -8,6 +8,7 @@
 #import "AppDelegate.h"
 #import "LBSearchViewController.h"
 #import "LBBootLoadingView.h"
+#import <AppTrackingTransparency/AppTrackingTransparency.h>
 
 @interface AppDelegate ()
 
@@ -32,6 +33,29 @@
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     [LBBootLoadingView showLoadingMode:LBLoadingModeFireBoot superView:nil];
+}
+
+- (void)applicationDidBecomeActive:(UIApplication *)application {
+    [self userTraking];
+}
+- (void)userTraking {
+    if (@available(iOS 14, *)) {
+        [ATTrackingManager requestTrackingAuthorizationWithCompletionHandler:^(ATTrackingManagerAuthorizationStatus status) {
+            switch (status) {
+                case ATTrackingManagerAuthorizationStatusDenied:
+                    NSLog(@"用户拒绝");
+                    break;
+                case ATTrackingManagerAuthorizationStatusAuthorized:
+                    NSLog(@"用户允许");
+                    break;
+                case ATTrackingManagerAuthorizationStatusNotDetermined:
+                    NSLog(@"用户未做选择");
+                    break;
+                default:
+                    break;
+            }
+        }];
+    }
 }
 
 @end
