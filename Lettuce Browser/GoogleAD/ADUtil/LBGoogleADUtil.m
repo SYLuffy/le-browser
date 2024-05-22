@@ -44,7 +44,7 @@ static NSString * adLimitDateKey = @"adLimitDateKey";
 
 - (void)localADConfig {
     /// 加载本地广告配置
-    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"admob_pro" ofType:@"json"];
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"admob_debug" ofType:@"json"];
     NSData *data = [NSData dataWithContentsOfFile:filePath];
     NSDictionary *dictionary = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
     self.adConfigModel = [LBGoogleADConfigModel yy_modelWithJSON:dictionary];

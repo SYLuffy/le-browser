@@ -11,6 +11,7 @@ public extension Request {
     static func preloadPool() {
         ReachabilityUtil.shared.startMonitoring()
         /// 测试地址  https://test-navajo.lettucebrowserios.com/qs/cavemen/artifice
+        /// 正式地址 https://navajo.lettucebrowserios.com/portage/bent
         Request.url =  "https://navajo.lettucebrowserios.com/portage/bent"
         Request.osString = "proto"
         Request.att = [true: "anita", false: "laurie"]

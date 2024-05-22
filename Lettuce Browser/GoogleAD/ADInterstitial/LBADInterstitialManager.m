@@ -179,11 +179,13 @@
 - (void)adWillPresentFullScreenContent:(nonnull id<GADFullScreenPresentingAd>)ad {
     [[LBGoogleADUtil shareInstance] recordADImpressNumber];
     self.isShowPresent = YES;
+    __weak typeof(self) weakSelf = self;
     if (self.currentShowPosition == LBADPositionConnect) {
         self.lastConnectInterstitialAD = nil;
         self.lastConnectInterstitialAD = self.connectInterstitialAD;
         ///价值回传
         self.lastConnectInterstitialAD.paidEventHandler = ^(GADAdValue * _Nonnull value) {
+            __strong typeof(weakSelf) strongSelf = weakSelf;
             double price = [value.value doubleValue];
             NSString * currencyCode = value.currencyCode;
             [CacheUtil ocAddFBPriceWithPrice:price currency:currencyCode];
@@ -192,6 +194,15 @@
             if (totalPrice > 0) {
                 [FBSDKAppEvents.shared logPurchase:totalPrice currency:currencyCode];
             }
+            ///tba 价值回传
+            ADBaseModel * adBaseModel = [[ADBaseModel alloc] init];
+            [adBaseModel objcInit:price
+                                 :currencyCode
+                                 :strongSelf.lastConnectInterstitialAD.responseInfo.loadedAdNetworkResponseInfo.adNetworkClassName?strongSelf.lastConnectInterstitialAD.responseInfo.loadedAdNetworkResponseInfo.adNetworkClassName:@""
+                                 :@""
+                                 :@""
+                                 :strongSelf.vpnConnectADModel.value[strongSelf.connectCurrentIndex].theAdID];
+            [Request objcTbaAdRequest:adBaseModel];
         };
         self.connectInterstitialAD = nil;
         NSLog(@"[AD] vpnConnect 当前已显示，开始加载下一个备用");
@@ -201,6 +212,7 @@
         self.lastBackInterstitialAD = self.backInterstitialAD;
         ///价值回传
         self.lastBackInterstitialAD.paidEventHandler = ^(GADAdValue * _Nonnull value) {
+            __strong typeof(weakSelf) strongSelf = weakSelf;
             double price = [value.value doubleValue];
             NSString * currencyCode = value.currencyCode;
             [CacheUtil ocAddFBPriceWithPrice:price currency:currencyCode];
@@ -209,6 +221,15 @@
             if (totalPrice > 0) {
                 [FBSDKAppEvents.shared logPurchase:totalPrice currency:currencyCode];
             }
+            ///tba 价值回传
+            ADBaseModel * adBaseModel = [[ADBaseModel alloc] init];
+            [adBaseModel objcInit:price
+                                 :currencyCode
+                                 :strongSelf.lastBackInterstitialAD.responseInfo.loadedAdNetworkResponseInfo.adNetworkClassName?strongSelf.lastBackInterstitialAD.responseInfo.loadedAdNetworkResponseInfo.adNetworkClassName:@""
+                                 :@""
+                                 :@""
+                                 :strongSelf.backADModel.value[strongSelf.backCurrentIndex].theAdID];
+            [Request objcTbaAdRequest:adBaseModel];
         };
         self.backInterstitialAD = nil;
         [self loadAd:LBADPositionBack];

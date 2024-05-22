@@ -138,6 +138,10 @@ typealias NetWorkEnd = () -> Void
         self.preloadPool()
     }
     
+    @objc static func objcTbaAdRequest(_ adBaseModel:ADBaseModel) {
+        self.tbaADRequest(ad: adBaseModel)
+    }
+    
     @objc static func objcCloak() {
         LBCloakRequest.requestCloak()
     }

@@ -15,7 +15,7 @@
 		195834712BBCF0BB00078C6C /* LBSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 195834702BBCF0BB00078C6C /* LBSearchViewController.m */; };
 		195834772BBCF83E00078C6C /* LBScreenAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 195834762BBCF83E00078C6C /* LBScreenAdapter.m */; };
 		19598F8C2BFDFB2C005F2063 /* admob_pro.json in Resources */ = {isa = PBXBuildFile; fileRef = 19598F8B2BFDFB2C005F2063 /* admob_pro.json */; };
-		19598F8F2BFE0048005F2063 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 19598F892BFDFA21005F2063 /* GoogleService-Info.plist */; };
+		19598F932BFE2527005F2063 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 19598F902BFE1B0C005F2063 /* GoogleService-Info.plist */; };
 		19948655409096BA407E2317 /* Pods_LBFlashVPN.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B0B34D8C8E7224CCFAD32D1 /* Pods_LBFlashVPN.framework */; };
 		199573512BF77F6C00796F3F /* LBTBALogManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 199573502BF77F6C00796F3F /* LBTBALogManager.swift */; };
 		199573542BF9DFB600796F3F /* LBCloakRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 199573532BF9DFB600796F3F /* LBCloakRequest.swift */; };
@@ -123,8 +123,8 @@
 		195834732BBCF43F00078C6C /* LBPrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LBPrefixHeader.pch; sourceTree = "<group>"; };
 		195834752BBCF83E00078C6C /* LBScreenAdapter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LBScreenAdapter.h; sourceTree = "<group>"; };
 		195834762BBCF83E00078C6C /* LBScreenAdapter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LBScreenAdapter.m; sourceTree = "<group>"; };
-		19598F892BFDFA21005F2063 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		19598F8B2BFDFB2C005F2063 /* admob_pro.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = admob_pro.json; sourceTree = "<group>"; };
+		19598F902BFE1B0C005F2063 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		199573502BF77F6C00796F3F /* LBTBALogManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LBTBALogManager.swift; sourceTree = "<group>"; };
 		199573532BF9DFB600796F3F /* LBCloakRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LBCloakRequest.swift; sourceTree = "<group>"; };
 		199573552BFB288100796F3F /* admob_debug.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = admob_debug.json; sourceTree = "<group>"; };
@@ -350,7 +350,7 @@
 		19598F882BFDFA04005F2063 /* Pro - FirebaseInfo */ = {
 			isa = PBXGroup;
 			children = (
-				19598F892BFDFA21005F2063 /* GoogleService-Info.plist */,
+				19598F902BFE1B0C005F2063 /* GoogleService-Info.plist */,
 			);
 			path = "Pro - FirebaseInfo";
 			sourceTree = "<group>";
@@ -851,7 +851,7 @@
 			files = (
 				195834622BBCEC7100078C6C /* Assets.xcassets in Resources */,
 				195834652BBCEC7100078C6C /* Base in Resources */,
-				19598F8F2BFE0048005F2063 /* GoogleService-Info.plist in Resources */,
+				19598F932BFE2527005F2063 /* GoogleService-Info.plist in Resources */,
 				19AE57952BC290E500422E01 /* terms of user.rtf in Resources */,
 				199573562BFB288100796F3F /* admob_debug.json in Resources */,
 				19AE57932BC2879C00422E01 /* privacy policy.rtf in Resources */,
@@ -1209,7 +1209,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 2.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.lettucebrowser.iostuitui;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lettucebrowser.iosyaho;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1257,7 +1257,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 2.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.lettucebrowser.iostuitui;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lettucebrowser.iosyaho;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1294,7 +1294,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.lettucebrowser.iostuitui.proxy;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lettucebrowser.iosyaho.proxy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
@@ -1333,7 +1333,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.lettucebrowser.iostuitui.proxy;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lettucebrowser.iosyaho.proxy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;

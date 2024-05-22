@@ -170,6 +170,7 @@
 - (void)adLoader:(GADAdLoader *)adLoader didReceiveNativeAd:(GADNativeAd *)nativeAd {
     self.isLoading = NO;
     self.loadedDate = [NSDate date];
+    __weak typeof(self) weakSelf = self;
     if (adLoader == self.homeLoader) {
         NSLog(@"[AD] homeNative 已加载完成 ✅✅");
         self.homeNativeAd = nativeAd;
@@ -178,6 +179,7 @@
             self.lastHomeNativeAd = nil;
             self.lastHomeNativeAd = self.homeNativeAd;
             self.lastHomeNativeAd.paidEventHandler = ^(GADAdValue * _Nonnull value) {
+                __strong typeof(weakSelf) strongSelf = weakSelf;
                 double price = [value.value doubleValue];
                 NSString * currencyCode = value.currencyCode;
                 [CacheUtil ocAddFBPriceWithPrice:price currency:currencyCode];
@@ -186,6 +188,15 @@
                 if (totalPrice > 0) {
                     [FBSDKAppEvents.shared logPurchase:totalPrice currency:currencyCode];
                 }
+                ///tba 价值回传
+                ADBaseModel * adBaseModel = [[ADBaseModel alloc] init];
+                [adBaseModel objcInit:price
+                                     :currencyCode
+                                     :strongSelf.lastHomeNativeAd.responseInfo.loadedAdNetworkResponseInfo.adNetworkClassName?strongSelf.lastHomeNativeAd.responseInfo.loadedAdNetworkResponseInfo.adNetworkClassName:@""
+                                     :@""
+                                     :@""
+                                     :strongSelf.homeNativeModel.value[strongSelf.currentHomeIndex].theAdID];
+                [Request objcTbaAdRequest:adBaseModel];
             };
         }
         if (self.homeNativeBlock) {
@@ -200,6 +211,7 @@
             self.lastResultNativeAd = nil;
             self.lastResultNativeAd = self.resultNativeAd;
             self.lastResultNativeAd.paidEventHandler = ^(GADAdValue * _Nonnull value) {
+                __strong typeof(weakSelf) strongSelf = weakSelf;
                 double price = [value.value doubleValue];
                 NSString * currencyCode = value.currencyCode;
                 [CacheUtil ocAddFBPriceWithPrice:price currency:currencyCode];
@@ -208,6 +220,15 @@
                 if (totalPrice > 0) {
                     [FBSDKAppEvents.shared logPurchase:totalPrice currency:currencyCode];
                 }
+                ///tba 价值回传
+                ADBaseModel * adBaseModel = [[ADBaseModel alloc] init];
+                [adBaseModel objcInit:price
+                                     :currencyCode
+                                     :strongSelf.lastResultNativeAd.responseInfo.loadedAdNetworkResponseInfo.adNetworkClassName?strongSelf.lastResultNativeAd.responseInfo.loadedAdNetworkResponseInfo.adNetworkClassName:@""
+                                     :@""
+                                     :@""
+                                     :strongSelf.resultNativeModel.value[strongSelf.currentResultIndex].theAdID];
+                [Request objcTbaAdRequest:adBaseModel];
             };
         }
         if (self.resultNativeBlock) {

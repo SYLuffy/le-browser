@@ -181,7 +181,7 @@ static LBVpnUtil * vpnUtil = nil;
     [manager setEnabled:YES];
     NETunnelProviderProtocol *p = [[NETunnelProviderProtocol alloc] init];
     p.serverAddress = @"Lettuce Browser";
-    p.providerBundleIdentifier = @"com.lettucebrowser.iostuitui.proxy";
+    p.providerBundleIdentifier = @"com.lettucebrowser.iosyaho.proxy";
     p.providerConfiguration = @{@"manager_version": @"manager_v1"};
     manager.protocolConfiguration = p;
     self.connectedEver = false;

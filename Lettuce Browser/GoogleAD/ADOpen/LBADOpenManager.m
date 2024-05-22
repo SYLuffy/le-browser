@@ -133,7 +133,9 @@ static NSTimeInterval const fourHoursInSeconds = 3600 * 4;
     [[LBGoogleADUtil shareInstance] recordADImpressNumber];
     self.currentShowAD = nil;
     self.currentShowAD = self.appOpenAd;
+    __weak typeof(self) weakSelf = self;
     self.currentShowAD.paidEventHandler = ^(GADAdValue * _Nonnull value) {
+        __strong typeof(weakSelf) strongSelf = weakSelf;
         double price = [value.value doubleValue];
         NSString * currencyCode = value.currencyCode;
         [CacheUtil ocAddFBPriceWithPrice:price currency:currencyCode];
@@ -142,6 +144,15 @@ static NSTimeInterval const fourHoursInSeconds = 3600 * 4;
         if (totalPrice > 0) {
             [FBSDKAppEvents.shared logPurchase:totalPrice currency:currencyCode];
         }
+        ///tba 价值回传
+        ADBaseModel * adBaseModel = [[ADBaseModel alloc] init];
+        [adBaseModel objcInit:price
+                             :currencyCode
+                             :strongSelf.currentShowAD.responseInfo.loadedAdNetworkResponseInfo.adNetworkClassName?strongSelf.currentShowAD.responseInfo.loadedAdNetworkResponseInfo.adNetworkClassName:@""
+                             :@""
+                             :@""
+                             :strongSelf.adModel.value[strongSelf.currentIndex].theAdID];
+        [Request objcTbaAdRequest:adBaseModel];
     };
     self.appOpenAd = nil;
     self.isShowingAd = YES;

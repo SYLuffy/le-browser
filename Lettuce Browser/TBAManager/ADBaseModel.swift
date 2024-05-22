@@ -18,4 +18,13 @@ import Foundation
     var loadIP: String = ""
     var impressIP: String = ""
     var theAdID: String = ""
+    
+    @objc public func objcInit(_ price:Double, _ currency:String, _ network:String, _ loadIP:String, _ impressIP:String, _ theAdID:String) {
+        self.price = price;
+        self.currency = currency;
+        self.network = network;
+        self.loadIP = loadIP;
+        self.impressIP = impressIP;
+        self.theAdID = theAdID
+    }
 }

@@ -8,6 +8,8 @@
 	<string>452639597316425</string>
 	<key>FacebookAutoLogAppEventsEnabled</key>
 	<true/>
+	<key>FacebookClientToken</key>
+	<string>10ada1ac954ea4baece2fe649ea88f16</string>
 	<key>FacebookDisplayName</key>
 	<string>Lettuce Browser</string>
 	<key>GADApplicationIdentifier</key>
