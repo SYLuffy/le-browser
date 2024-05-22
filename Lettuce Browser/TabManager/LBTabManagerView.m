@@ -11,6 +11,8 @@
 #import "LBSearchViewController.h"
 #import "AppDelegate.h"
 #import "LBWebPageTabModel.h"
+#import "LBNativeView.h"
+#import "Lettuce_Browser-Swift.h"
 
 @interface LBTabManagerView () <UICollectionViewDelegate, UICollectionViewDataSource>
 
@@ -19,6 +21,7 @@
 @property (nonatomic, strong) UIButton * addNewButton;
 @property (nonatomic, strong) LBWebPageTabModel * fromModel;
 @property (nonatomic, assign) BOOL isRemoved;
+@property (nonatomic, strong)LBNativeView * nativeADView;
 
 @end
 
@@ -30,10 +33,11 @@
     popView.frame = CGRectMake(0, 0, kLBDeviceWidth, kLBDeviceHeight);
     popView.backgroundColor = [UIColor LB_colorWithHex:0xff030B08];
     if (!superView) {
-        [[UIApplication sharedApplication].windows.lastObject addSubview:popView];
+        [[UIApplication sharedApplication].windows.firstObject addSubview:popView];
     }else {
         [superView addSubview:popView];
     }
+    [LBTBALogManager objcLogEventWithName:@"session_start" params:nil];
     return popView;
 }
 
@@ -49,12 +53,13 @@
     [self addSubview:self.collectionView];
     [self addSubview:self.addNewButton];
     [self addSubview:self.backButton];
+    [self addSubview:self.nativeADView];
     
     [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.mas_left).offset(LBAdapterHeight(16));
         make.right.mas_equalTo(self.mas_right);
         make.top.mas_equalTo(self.mas_top).offset(LBAdapterHeight(64));
-        make.bottom.mas_equalTo(self.mas_bottom).offset(LBAdapterHeight(-81));
+        make.bottom.mas_equalTo(self.nativeADView.mas_top).offset(LBAdapterHeight(-11));
     }];
     
     [self.addNewButton mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -70,13 +75,27 @@
         make.height.mas_equalTo(LBAdapterHeight(20));
     }];
     
+    [self.nativeADView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self.mas_left).offset(LBAdapterHeight(20));
+        make.right.mas_equalTo(self.mas_right).offset(LBAdapterHeight(-20));
+        make.bottom.mas_equalTo(self.addNewButton.mas_top).offset(LBAdapterHeight(-18));
+    }];
+    
+    
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self.collectionView reloadData];
     });
     [self removeHandler];
+    
+    [[LBADNativeManager shareInstance] showNativeAd:LBADPositionHomeNative showLocation:LBADShowLocationTabPage searchTabKey:nil showNativeBlock:^(GADNativeAd * _Nullable nativeAD) {
+        [self.nativeADView configGADNativeAd:nativeAD];
+    }];
+    
+    [LBTBALogManager objcLogEventWithName:@"pro_showTab" params:nil];
 }
 
 - (void)addNewClicked:(UIButton *)sender {
+    [LBTBALogManager objcLogEventWithName:@"pro_clickTab" params:@{@"bro":@"tab"}];
     [self addNewSerchVC:nil];
 }
 
@@ -101,6 +120,9 @@
     if (self.isRemoved) {
         [self addNewSerchVC:self.fromModel];
     }else {
+        if (self.backToBlock) {
+            self.backToBlock();
+        }
         [self dismiss];
     }
 }
@@ -174,6 +196,14 @@
         [_addNewButton addTarget:self action:@selector(addNewClicked:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _addNewButton;
+}
+
+- (LBNativeView *)nativeADView {
+    if (!_nativeADView) {
+        _nativeADView = [[LBNativeView alloc] init];
+        [_nativeADView configGADNativeAd:nil];
+    }
+    return _nativeADView;
 }
 
 @end

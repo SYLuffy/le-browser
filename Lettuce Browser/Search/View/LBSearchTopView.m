@@ -6,6 +6,7 @@
 //
 
 #import "LBSearchTopView.h"
+#import "Lettuce_Browser-Swift.h"
 
 @interface LBSearchTopView () <UITextFieldDelegate>
 
@@ -147,6 +148,7 @@
     NSString * string = textField.text;
     NSString * realStr = [string stringByReplacingOccurrencesOfString:@" " withString:@""];
     if (realStr.length > 0) {
+        [LBTBALogManager objcLogEventWithName:@"pro_search" params:@{@"bro":realStr}];
         if (self.searchInputBlock) {
             self.searchInputBlock(string);
         }

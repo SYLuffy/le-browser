@@ -13,7 +13,7 @@
 + (BOOL)isIphoneNotchScreen {
     BOOL result = false;
     if (@available(iOS 11.0, *)) {
-        result = [UIApplication sharedApplication].windows.lastObject.safeAreaInsets.bottom > 0?true:false;
+        result = [UIApplication sharedApplication].windows.firstObject.safeAreaInsets.bottom > 0?true:false;
     }
     return result;
 }

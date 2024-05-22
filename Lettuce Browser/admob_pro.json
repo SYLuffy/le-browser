@@ -1,0 +1,58 @@
+{
+    "installOnlyTouch": true,
+    "showTimes": 300,
+    "clickTimes": 50,
+    "ads": [
+        {
+            "key": "loadingOpen",
+            "type": "open",
+            "value": [
+                {
+                    "theAdPriority": 1,
+                    "theAdID":"ca-app-pub-1211676492232272~8729689954"
+                }
+            ]
+        },
+        {
+            "key": "homeNative",
+            "type": "native",
+            "value": [
+                {
+                    "theAdPriority": 1,
+                    "theAdID":"ca-app-pub-1211676492232272/1689638883"
+                }
+            ]
+        },
+        {
+            "key": "resultNative",
+            "type": "native",
+            "value":
+ [
+                {
+                    "theAdPriority": 1,
+                    "theAdID":"ca-app-pub-1211676492232272/4806756813"
+                }
+            ]
+        },
+        {
+            "key": "vpnConnect",
+            "type": "interstitial",
+            "value": [
+                {
+                    "theAdPriority": 1,
+                    "theAdID":"ca-app-pub-1211676492232272/6119838483"
+                }
+            ]
+        },
+        {
+            "key": "back",
+            "type": "interstitial",
+            "value": [
+                {
+                    "theAdPriority": 1,
+                    "theAdID":"ca-app-pub-1211676492232272/4920191473"
+                }
+            ]
+        }
+    ]
+}

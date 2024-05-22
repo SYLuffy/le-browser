@@ -8,6 +8,7 @@
 #import "LBSmartServerViewController.h"
 #import "LBVpnModel.h"
 #import "LBSmartServerCollectionViewCell.h"
+#import "Lettuce_Browser-Swift.h"
 
 @interface LBSmartServerViewController () <UICollectionViewDelegate, UICollectionViewDataSource>
 
@@ -21,6 +22,11 @@
 @end
 
 @implementation LBSmartServerViewController
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [LBTBALogManager objcLogEventWithName:@"session_start" params:nil];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];

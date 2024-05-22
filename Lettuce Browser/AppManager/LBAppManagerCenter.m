@@ -6,8 +6,8 @@
 //
 
 #import "LBAppManagerCenter.h"
-#import <AFNetworking/AFNetworking.h>
 #import "LBVpnModel.h"
+#import "Lettuce_Browser-Swift.h"
 
 static LBAppManagerCenter * aManager = nil;
 static NSString * const kSaveConnectedVpnName = @"kSaveConnectedVpnName";
@@ -26,12 +26,21 @@ static NSString * const kSaveConnectedVpnName = @"kSaveConnectedVpnName";
         aManager = [[LBAppManagerCenter alloc] init];
         aManager.vpnKeepTime = 0;
         [aManager initData];
-        [aManager checkNetStatus];
     });
     return aManager;
 }
 
 - (void)initData {
+    /// 请求cloak
+    [Request objcCloak];
+    /// 初始化TBA上报请求
+    [Request objcPreload];
+    [Request objcTbaRequestWithKey:@"install"];
+    [Request objcTbaRequestWithKey:@"first_Open"];
+    
+    [LBTBALogManager objcLogEventWithName:@"pro_lun" params:nil];
+    [LBTBALogManager objcLogEventWithName:@"pro_clod" params:nil];
+    
     NSString * vpnTitle = [[NSUserDefaults standardUserDefaults] objectForKey:kSaveConnectedVpnName];
     self.vpnModelList = [self getVpnConfigList];
     
@@ -47,32 +56,8 @@ static NSString * const kSaveConnectedVpnName = @"kSaveConnectedVpnName";
     
 }
 
-///网络检测
-- (void)checkNetStatus {
-    __weak typeof(self) weakSelf = self;
-    AFNetworkReachabilityManager *manager = [AFNetworkReachabilityManager sharedManager];
-    [manager startMonitoring];
-    [manager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
-        __strong typeof(weakSelf) strongSelf = weakSelf;
-        switch (status) {
-            case AFNetworkReachabilityStatusUnknown:
-                strongSelf.networkStatus = LBAppNetworkStatusUnknow;
-                break;
-            case AFNetworkReachabilityStatusNotReachable:
-                strongSelf.networkStatus = LBAppNetworkStatusNotReachable;
-                break;
-            case AFNetworkReachabilityStatusReachableViaWWAN:
-            case AFNetworkReachabilityStatusReachableViaWiFi:
-                strongSelf.networkStatus = LBAppNetworkStatusReachable;
-                break;
-            default:
-                break;
-        }
-    }];
-}
-
 - (BOOL)checkShowNetworkNotReachableToast {
-    if (self.networkStatus != LBAppNetworkStatusReachable) {
+   if ([ReachabilityUtil ocIsConnected] == false) {
         [LBToast showMessage:@"Local network is not turned on." duration:3 finishHandler:nil];
         return YES;
     }
@@ -83,9 +68,9 @@ static NSString * const kSaveConnectedVpnName = @"kSaveConnectedVpnName";
     ///,@"vpn_smart_Germany",@"vpn_smart_France",@"vpn_smart_Japan",@"vpn_smart_Australia",@"vpn_smart_Singapore"
     ///,@"Germany",@"France",@"Japan",@"Australia",@"Singapore"
     NSMutableArray * mArrays = [[NSMutableArray alloc] init];
-    NSArray * iconNameArray = @[@"vpn_smart_smart",@"vpn_smart_US",@"vpn_smart_Canada"];
-    NSArray * countryArray = @[@"Smart Server",@"Unite States",@"Canada"];
-    NSArray * ipArrays = @[@"104.237.128.93",@"195.88.24.218",@"104.237.128.93"];
+    NSArray * iconNameArray = @[@"vpn_smart_smart",@"vpn_smart_US",@"vpn_smart_US"];
+    NSArray * countryArray = @[@"Smart Server",@"Unite States-Dallas",@"Unite States-Ashburn"];
+    NSArray * ipArrays = @[@"38.68.134.141",@"38.68.134.141",@"45.135.229.173"];
     for (int i = 0; i < iconNameArray.count; i ++) {
         NSString * imageName = iconNameArray[i];
         NSString * countryName = countryArray[i];
@@ -94,8 +79,8 @@ static NSString * const kSaveConnectedVpnName = @"kSaveConnectedVpnName";
         model.titleName = countryName;
         LBVpnInfoModel * infoModel = [[LBVpnInfoModel alloc] init];
         infoModel.serverIP = ipArrays[i];
-        infoModel.serverPort = @"1543";
-        infoModel.password = @"K49qpWT_sU8ML1+m";
+        infoModel.serverPort = @"1497";
+        infoModel.password = @"bahoKuxVZqklBiWC";
         infoModel.method = @"chacha20-ietf-poly1305";
         model.vpnInfo = infoModel;
         [mArrays addObject:model];
@@ -133,6 +118,9 @@ static NSString * const kSaveConnectedVpnName = @"kSaveConnectedVpnName";
     if (self.timer) {
         dispatch_source_cancel(_timer);
         _timer = nil;
+    }
+    if (self.vpnKeepTime > 2) {
+        [LBTBALogManager objcLogEventWithName:@"pro_disLink" params:@{@"duration":@(self.vpnKeepTime)}];
     }
     self.lastVpnKeepTime = self.vpnKeepTime;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{

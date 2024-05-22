@@ -19,6 +19,8 @@ typedef NS_ENUM(NSUInteger, LBVpnStatus) {
 @interface LBVpnStatusView : UIView
 
 @property (nonatomic, assign) LBVpnStatus vpnStatus;
+///是否正在展示connect插屏广告
+@property (nonatomic, assign) BOOL isShowConnectAD;
 
 - (instancetype)initWithVpnStatus:(LBVpnStatus)status;
 

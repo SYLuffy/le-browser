@@ -8,11 +8,13 @@
 #import "LBVpnUtil.h"
 #import <NetworkExtension/NetworkExtension.h>
 #import "LBVpnModel.h"
+#import "Lettuce_Browser-Swift.h"
 
 static LBVpnUtil * vpnUtil = nil;
 
 @interface LBVpnUtil ()
 @property (nonatomic, strong) NETunnelProviderManager * manager;
+@property (nonatomic, strong) NSString * currentConnectIpAdress;
 
 @end
 
@@ -54,7 +56,9 @@ static LBVpnUtil * vpnUtil = nil;
                 case NEVPNStatusConnected:
                     LBDebugLog(@"NEVPNStatusConnected");
                     self.vpnState = LBVpnStateConnected;
+                    [[LBADNativeManager shareInstance] load:LBADPositionResultNative];
                     [[LBAppManagerCenter shareInstance] saveCurrentVpnInfo];
+                    [LBTBALogManager objcLogEventWithName:@"pro_link2" params:@{@"rot":self.currentConnectIpAdress?self.currentConnectIpAdress:@"38.68.134.141"}];
                     break;
                 case NEVPNStatusDisconnecting:
                     LBDebugLog(@"NEVPNStatusDisconnecting");
@@ -86,12 +90,16 @@ static LBVpnUtil * vpnUtil = nil;
 
 #pragma mark - vpn
 -(void)connectWithServer:(LBVpnModel * _Nullable)model {
+    self.currentConnectIpAdress = model.vpnInfo.serverIP;
+    [LBTBALogManager objcLogEventWithName:@"pro_link" params:nil];
+    [LBTBALogManager objcLogEventWithName:@"pro_link0" params:@{@"rot":model.vpnInfo.serverIP}];
     self.currentConnectingVpnModel = model;
     self.isActiveConnect = YES;
     NSString * logInfo = [NSString stringWithFormat:@"记录当前正在连接的vpn：name:%@,ip:%@", self.currentConnectingVpnModel.iconName, self.currentConnectingVpnModel.vpnInfo.serverIP];
     LBDebugLog(logInfo);
     if (!self.manager) {
         LBDebugLog(@"[VPN MANAGER] manager is nil, cannot connect");
+        [LBTBALogManager objcLogEventWithName:@"pro_link1" params:nil];
         self.vpnState = LBVpnStateError;
         return;
     }
@@ -106,6 +114,7 @@ static LBVpnUtil * vpnUtil = nil;
             if (error) {
                 NSString * loginInfo = [NSString stringWithFormat:@"[VPN MANAGER] cannot enable mananger: %@", error.localizedDescription];
                 LBDebugLog(loginInfo);
+                [LBTBALogManager objcLogEventWithName:@"pro_link1" params:nil];
                 strongSelf.managerState = LBVpnManagerStateError;
             } else {
                 [strongSelf.manager setEnabled:YES];
@@ -113,6 +122,7 @@ static LBVpnUtil * vpnUtil = nil;
                     if (error) {
                         NSString * logInfo = [NSString stringWithFormat:@"[VPN MANAGER] cannot save manager into preferences: %@", error.localizedDescription];
                         LBDebugLog(logInfo);
+                        [LBTBALogManager objcLogEventWithName:@"pro_link1" params:nil];
                         strongSelf.managerState = LBVpnManagerStateError;
                     } else {
                         [self startVPNTunnelWithServer:model];
@@ -140,10 +150,13 @@ static LBVpnUtil * vpnUtil = nil;
         LBDebugLog(@"[VPN MANAGER] manager is nil, cannot connect");
         return;
     }
-    
+    if ([CacheUtil objecGetUserGo]) {
+        [[LBADInterstitialManager shareInstance] loadAd:LBADPositionBack];
+    }
     NSError *error = nil;
     [self.manager.connection startVPNTunnelWithOptions:[model objectConfig] andReturnError:&error];
     if (error) {
+        [LBTBALogManager objcLogEventWithName:@"pro_link1" params:nil];
         NSString * logInfo = [NSString stringWithFormat:@"[VPN MANAGER] Start VPN failed %@", error.localizedDescription];
         LBDebugLog(logInfo);
         self.vpnState = LBVpnStateError;
@@ -167,8 +180,8 @@ static LBVpnUtil * vpnUtil = nil;
     NETunnelProviderManager *manager = [[NETunnelProviderManager alloc] init];
     [manager setEnabled:YES];
     NETunnelProviderProtocol *p = [[NETunnelProviderProtocol alloc] init];
-    p.serverAddress = @"VPNTest";
-    p.providerBundleIdentifier = lb_providerBundleIdentifier;
+    p.serverAddress = @"Lettuce Browser";
+    p.providerBundleIdentifier = @"com.lettucebrowser.iostuitui.proxy";
     p.providerConfiguration = @{@"manager_version": @"manager_v1"};
     manager.protocolConfiguration = p;
     self.connectedEver = false;

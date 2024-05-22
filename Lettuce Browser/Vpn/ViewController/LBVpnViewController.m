@@ -8,6 +8,8 @@
 #import "LBVpnViewController.h"
 #import "LBVpnSmartServerEntrenceVIew.h"
 #import "LBVpnStatusView.h"
+#import "LBNativeView.h"
+#import "Lettuce_Browser-Swift.h"
 
 @interface LBVpnViewController () <SmartServerEntrenceProtocol>
 
@@ -16,6 +18,10 @@
 @property (nonatomic, strong)LBVpnSmartServerEntrenceVIew * smartServerEntrenceView;
 @property (nonatomic, strong)LBVpnStatusView * vpnStatusView;
 @property (nonatomic, assign)BOOL isStartConnect;
+@property (nonatomic, strong)LBNativeView * nativeADView;
+@property (nonatomic, assign)BOOL isFirstLoad;
+///已触发了返回按钮
+@property (nonatomic, assign)BOOL isBackShow;
 
 @end
 
@@ -36,11 +42,28 @@
         self.isStartConnect = NO;
         [self.vpnStatusView clickEvent];
     }
+    if ([CacheUtil objecGetUserGo] && !self.isBackShow && ![[LBADInterstitialManager shareInstance] getCurrentAdModel:LBADPositionBack]) {
+        [[LBADInterstitialManager shareInstance] loadAd:LBADPositionBack];
+    }
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    if (!self.isFirstLoad && !self.isBackShow) {
+        [self updateNativeAd];
+    }else {
+        self.isFirstLoad = NO;
+    }
+    if (!self.isBackShow) {
+        [LBTBALogManager objcLogEventWithName:@"pro_1" params:nil];
+        [LBTBALogManager objcLogEventWithName:@"session_start" params:nil];
+    }
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.isFirstLoad = YES;
+    self.isBackShow = NO;
     [self initializeAppearance];
 }
 
@@ -51,6 +74,7 @@
     [self.view addSubview:self.iconImgView];
     [self.view addSubview:self.smartServerEntrenceView];
     [self.view addSubview:self.vpnStatusView];
+    [self.view addSubview:self.nativeADView];
     
     [self.backButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.height.mas_equalTo(LBAdapterHeight(20));
@@ -72,10 +96,38 @@
         make.top.mas_equalTo(self.iconImgView.mas_bottom).offset(LBAdapterHeight(34));
     }];
     
+    CGFloat padding = 46;
+    if (!kLBIsIphoneX) {
+        padding = 30;
+    }
     [self.vpnStatusView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.smartServerEntrenceView.mas_bottom).offset(LBAdapterHeight(46));
+        make.top.mas_equalTo(self.smartServerEntrenceView.mas_bottom).offset(LBAdapterHeight(padding));
         make.left.right.mas_equalTo(self.view);
         make.bottom.mas_equalTo(LBAdapterHeight(-236));
+    }];
+    
+    CGFloat bottomPadding = -38;
+    if (!kLBIsIphoneX) {
+        bottomPadding = -30;
+    }
+    [self.nativeADView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.mas_equalTo(self.view.mas_bottom).offset(LBAdapterHeight(bottomPadding));
+        make.left.mas_equalTo(self.view.mas_left).offset(LBAdapterHeight(20));
+        make.right.mas_equalTo(self.view.mas_right).offset(LBAdapterHeight(-20));
+    }];
+    
+    [self updateNativeAd];
+}
+
+- (void)updateNativeAd {
+    if (self.vpnStatusView.isShowConnectAD) {
+        NSLog(@"[AD], 正在展示插屏广告，不触发vpn首页广告刷新逻辑");
+        return;
+    }
+    __weak typeof(self) weakSelf = self;
+    [[LBADNativeManager shareInstance] showNativeAd:LBADPositionHomeNative showLocation:LBADShowLocationVpnHomePage searchTabKey:nil showNativeBlock:^(GADNativeAd * _Nullable nativeAD) {
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        [strongSelf.nativeADView configGADNativeAd:nativeAD];
     }];
 }
 
@@ -83,7 +135,16 @@
     if (self.vpnStatusView.vpnStatus == LBVpnStateConnecting || self.vpnStatusView.vpnStatus == LBVpnStateDisconnecting) {
         return;
     }
-    [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+    self.isBackShow = YES;
+    [LBTBALogManager objcLogEventWithName:@"pro_homeback" params:nil];
+    if ([CacheUtil objecGetUserGo]) {
+        [LBADInterstitialManager shareInstance].ADDismissBlock = ^{
+            [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+        };
+        [[LBADInterstitialManager shareInstance] showAd:LBADPositionBack];
+    }else {
+        [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+    }
 }
 
 - (void)vpnDisconnected {
@@ -128,5 +189,13 @@
     }
     return _vpnStatusView;
 }  
+
+- (LBNativeView *)nativeADView {
+    if (!_nativeADView) {
+        _nativeADView = [[LBNativeView alloc] init];
+        [_nativeADView configGADNativeAd:nil];
+    }
+    return _nativeADView;
+}
 
 @end

@@ -9,6 +9,7 @@
 #import "LBSmartServerResultViewController.h"
 #import "LBVpnModel.h"
 #import "LBVpnInfoModel.h"
+#import "Lettuce_Browser-Swift.h"
 
 @interface LBVpnStatusView () <CAAnimationDelegate>
 
@@ -120,8 +121,8 @@
         imageView.layer.cornerRadius = LBAdapterHeight(26);
         imageView.clipsToBounds = YES;
     }
-    ///进度持续时间 固定 3秒
-    self.animationNumber = 1.0/(3/0.1);
+    ///进度持续时间 固定 5秒
+    self.animationNumber = 1.0/(10/0.1);
     [self updateUI:self.vpnStatus];
     [self addVpnKeepTimeObserver];
     [self addAppForwroundNotification];
@@ -236,10 +237,13 @@
     self.isProcessing = YES;
     if ([LBVpnUtil shareInstance].managerState != LBVpnManagerStateReady) {
         if (![[LBAppManagerCenter shareInstance] checkShowNetworkNotReachableToast]) {
+            [LBTBALogManager objcLogEventWithName:@"pro_pm" params:nil];
             [[LBVpnUtil shareInstance] createWithCompletionHandler:^(NSError * _Nonnull error) {
                 if (!error) {
+                    [LBTBALogManager objcLogEventWithName:@"pro_pm2" params:nil];
                     [self clickHandle];
                 }else {
+                    [LBTBALogManager objcLogEventWithName:@"pro_pm1" params:nil];
                     [LBToast showMessage:@"Try it agin." duration:3 finishHandler:nil];
                     self.isProcessing = NO;
                 }
@@ -258,10 +262,15 @@
 
 - (void)clickHandle {
     switch (self.vpnStatus) {
-        case LBVpnStatusNormal:
+        case LBVpnStatusNormal: {
+            [[LBADNativeManager shareInstance] load:LBADPositionResultNative];
+            [[LBADInterstitialManager shareInstance] loadAd:LBADPositionConnect];
             [self updateUI:LBVpnStatusConnecting];
+        }
             break;
         case LBVpnStatusConnected:
+            [[LBADNativeManager shareInstance] load:LBADPositionResultNative];
+            [[LBADInterstitialManager shareInstance] loadAd:LBADPositionConnect];
             [self updateUI:LBVpnStatusDisconnecting];
             break;
         default:
@@ -271,13 +280,21 @@
 }
 
 - (void)jumpResultVc {
-    LBSmartType type = LBSmartTypeSuccessed;
-    if (self.vpnStatus == LBVpnStatusDisconnecting) {
-        type = LBSmartTypeFailed;
-    }
-    LBSmartServerResultViewController *resultVC = [[LBSmartServerResultViewController alloc] initWithSmartType:type];
-    resultVC.modalPresentationStyle = UIModalPresentationFullScreen;
-    [[self jjc_getCurrentUIVC] presentViewController:resultVC animated:YES completion:nil];
+    self.isShowConnectAD = YES;
+    __weak typeof(self) weakSelf = self;
+    [LBADInterstitialManager shareInstance].ADDismissBlock = ^{
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        LBSmartType type = LBSmartTypeSuccessed;
+        if (strongSelf.vpnStatus == LBVpnStatusDisconnecting || strongSelf.vpnStatus == LBVpnStatusNormal) {
+            type = LBSmartTypeFailed;
+        }
+        LBSmartServerResultViewController *resultVC = [[LBSmartServerResultViewController alloc] initWithSmartType:type];
+        resultVC.modalPresentationStyle = UIModalPresentationFullScreen;
+        [[strongSelf jjc_getCurrentUIVC] presentViewController:resultVC animated:YES completion:^{
+            strongSelf.isShowConnectAD = false;
+        }];
+    };
+    [[LBADInterstitialManager shareInstance] showAd:LBADPositionConnect];
 }
 
 #pragma mark - Timer

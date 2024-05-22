@@ -1,0 +1,70 @@
+{
+    "installOnlyTouch": true,
+    "showTimes": 300,
+    "clickTimes": 50,
+    "ads": [
+        {
+            "key": "loadingOpen",
+            "type": "open",
+            "value": [
+                {
+                    "theAdPriority": 2,
+                    "theAdID":"ca-app-pub-3940256099942544/5575463023B"
+                },
+                {
+                    "theAdPriority": 1,
+                    "theAdID":"ca-app-pub-3940256099942544/5575463023A"
+                },
+                {
+                    "theAdPriority": 4,
+                    "theAdID":"ca-app-pub-3940256099942544/5575463023D"
+                },
+                {
+                    "theAdPriority": 3,
+                    "theAdID":"ca-app-pub-3940256099942544/5575463023"
+                }
+            ]
+        },
+        {
+            "key": "homeNative",
+            "type": "native",
+            "value": [
+                {
+                    "theAdPriority": 1,
+                    "theAdID":"ca-app-pub-3940256099942544/3986624511"
+                }
+            ]
+        },
+        {
+            "key": "resultNative",
+            "type": "native",
+            "value":
+ [
+                {
+                    "theAdPriority": 1,
+                    "theAdID":"ca-app-pub-3940256099942544/3986624511"
+                }
+            ]
+        },
+        {
+            "key": "vpnConnect",
+            "type": "interstitial",
+            "value": [
+                {
+                    "theAdPriority": 1,
+                    "theAdID":"ca-app-pub-3940256099942544/4411468910"
+                }
+            ]
+        },
+        {
+            "key": "back",
+            "type": "interstitial",
+            "value": [
+                {
+                    "theAdPriority": 1,
+                    "theAdID":"ca-app-pub-3940256099942544/4411468910"
+                }
+            ]
+        }
+    ]
+}

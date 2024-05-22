@@ -25,7 +25,7 @@
     LBAlertView * alertVM = [[LBAlertView alloc] init];
     alertVM.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.7];
     if (!superView) {
-        [[UIApplication sharedApplication].windows.lastObject addSubview:alertVM];
+        [[UIApplication sharedApplication].windows.firstObject addSubview:alertVM];
     }else {
         [superView addSubview:alertVM];
     }

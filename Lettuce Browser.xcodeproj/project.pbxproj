@@ -14,7 +14,16 @@
 		195834682BBCEC7100078C6C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 195834672BBCEC7100078C6C /* main.m */; };
 		195834712BBCF0BB00078C6C /* LBSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 195834702BBCF0BB00078C6C /* LBSearchViewController.m */; };
 		195834772BBCF83E00078C6C /* LBScreenAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 195834762BBCF83E00078C6C /* LBScreenAdapter.m */; };
+		19598F8C2BFDFB2C005F2063 /* admob_pro.json in Resources */ = {isa = PBXBuildFile; fileRef = 19598F8B2BFDFB2C005F2063 /* admob_pro.json */; };
+		19598F8F2BFE0048005F2063 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 19598F892BFDFA21005F2063 /* GoogleService-Info.plist */; };
 		19948655409096BA407E2317 /* Pods_LBFlashVPN.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B0B34D8C8E7224CCFAD32D1 /* Pods_LBFlashVPN.framework */; };
+		199573512BF77F6C00796F3F /* LBTBALogManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 199573502BF77F6C00796F3F /* LBTBALogManager.swift */; };
+		199573542BF9DFB600796F3F /* LBCloakRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 199573532BF9DFB600796F3F /* LBCloakRequest.swift */; };
+		199573562BFB288100796F3F /* admob_debug.json in Resources */ = {isa = PBXBuildFile; fileRef = 199573552BFB288100796F3F /* admob_debug.json */; };
+		1995735A2BFB31B300796F3F /* NSObject+PositionTag.m in Sources */ = {isa = PBXBuildFile; fileRef = 199573592BFB31B300796F3F /* NSObject+PositionTag.m */; };
+		1995735D2BFB31FB00796F3F /* LBGoogleADUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 1995735C2BFB31FB00796F3F /* LBGoogleADUtil.m */; };
+		199573612BFB486A00796F3F /* LBGoogleADConfigModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 199573602BFB486A00796F3F /* LBGoogleADConfigModel.m */; };
+		199573662BFD8B7500796F3F /* ADBaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 199573652BFD8B7500796F3F /* ADBaseModel.swift */; };
 		19A25F7F2BC4D23900030139 /* LBAppManagerCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 19A25F7E2BC4D23900030139 /* LBAppManagerCenter.m */; };
 		19A25F822BC4DC7D00030139 /* LBWebPageTabManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 19A25F812BC4DC7C00030139 /* LBWebPageTabManager.m */; };
 		19A25F872BC4E3A600030139 /* UIView+Util.m in Sources */ = {isa = PBXBuildFile; fileRef = 19A25F862BC4E3A600030139 /* UIView+Util.m */; };
@@ -44,6 +53,19 @@
 		19AE579C2BC29AF900422E01 /* LBTabManagerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 19AE579B2BC29AF900422E01 /* LBTabManagerView.m */; };
 		19AE57A02BC29B5300422E01 /* LBTabWebCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 19AE579F2BC29B5300422E01 /* LBTabWebCollectionViewCell.m */; };
 		19C225E22BF1AAD8008E9B94 /* AppTrackingTransparency.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19C225E12BF1AAD8008E9B94 /* AppTrackingTransparency.framework */; };
+		19C225ED2BF36296008E9B94 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C225E82BF36296008E9B94 /* API.swift */; };
+		19C225EE2BF36296008E9B94 /* CacheUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C225E92BF36296008E9B94 /* CacheUtil.swift */; };
+		19C225EF2BF36296008E9B94 /* BaseRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C225EA2BF36296008E9B94 /* BaseRequest.swift */; };
+		19C225F02BF36296008E9B94 /* ReachabilityUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C225EB2BF36296008E9B94 /* ReachabilityUtil.swift */; };
+		19C225F12BF36296008E9B94 /* Request+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C225EC2BF36296008E9B94 /* Request+Ext.swift */; };
+		19C225F62BF49869008E9B94 /* TBARequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 19C225F52BF49869008E9B94 /* TBARequestManager.m */; };
+		19C226012BF5A384008E9B94 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C225FE2BF5A384008E9B94 /* FirebaseManager.swift */; };
+		19C226022BF5A384008E9B94 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C225FF2BF5A384008E9B94 /* Helper.swift */; };
+		19C226032BF5A384008E9B94 /* Property.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C226002BF5A384008E9B94 /* Property.swift */; };
+		19C2260A2BF60377008E9B94 /* LBADOpenManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 19C226092BF60377008E9B94 /* LBADOpenManager.m */; };
+		19C2260D2BF60B57008E9B94 /* LBADNativeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 19C2260C2BF60B57008E9B94 /* LBADNativeManager.m */; };
+		19C226102BF60B64008E9B94 /* LBADInterstitialManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 19C2260F2BF60B64008E9B94 /* LBADInterstitialManager.m */; };
+		19C226132BF6177B008E9B94 /* LBNativeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 19C226122BF6177B008E9B94 /* LBNativeView.m */; };
 		19D68F672BC6319B0038E873 /* LBVpnViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19D68F662BC6319B0038E873 /* LBVpnViewController.m */; };
 		19D68F6C2BC6347D0038E873 /* LBVpnSmartServerEntrenceVIew.m in Sources */ = {isa = PBXBuildFile; fileRef = 19D68F6B2BC6347D0038E873 /* LBVpnSmartServerEntrenceVIew.m */; };
 		19D68F6F2BC662F90038E873 /* LBVpnStatusView.m in Sources */ = {isa = PBXBuildFile; fileRef = 19D68F6E2BC662F90038E873 /* LBVpnStatusView.m */; };
@@ -101,6 +123,19 @@
 		195834732BBCF43F00078C6C /* LBPrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LBPrefixHeader.pch; sourceTree = "<group>"; };
 		195834752BBCF83E00078C6C /* LBScreenAdapter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LBScreenAdapter.h; sourceTree = "<group>"; };
 		195834762BBCF83E00078C6C /* LBScreenAdapter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LBScreenAdapter.m; sourceTree = "<group>"; };
+		19598F892BFDFA21005F2063 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		19598F8B2BFDFB2C005F2063 /* admob_pro.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = admob_pro.json; sourceTree = "<group>"; };
+		199573502BF77F6C00796F3F /* LBTBALogManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LBTBALogManager.swift; sourceTree = "<group>"; };
+		199573532BF9DFB600796F3F /* LBCloakRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LBCloakRequest.swift; sourceTree = "<group>"; };
+		199573552BFB288100796F3F /* admob_debug.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = admob_debug.json; sourceTree = "<group>"; };
+		199573582BFB31B300796F3F /* NSObject+PositionTag.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSObject+PositionTag.h"; sourceTree = "<group>"; };
+		199573592BFB31B300796F3F /* NSObject+PositionTag.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSObject+PositionTag.m"; sourceTree = "<group>"; };
+		1995735B2BFB31FB00796F3F /* LBGoogleADUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LBGoogleADUtil.h; sourceTree = "<group>"; };
+		1995735C2BFB31FB00796F3F /* LBGoogleADUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LBGoogleADUtil.m; sourceTree = "<group>"; };
+		1995735F2BFB486A00796F3F /* LBGoogleADConfigModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LBGoogleADConfigModel.h; sourceTree = "<group>"; };
+		199573602BFB486A00796F3F /* LBGoogleADConfigModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LBGoogleADConfigModel.m; sourceTree = "<group>"; };
+		199573632BFC9CED00796F3F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		199573652BFD8B7500796F3F /* ADBaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADBaseModel.swift; sourceTree = "<group>"; };
 		19A25F7D2BC4D23900030139 /* LBAppManagerCenter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LBAppManagerCenter.h; sourceTree = "<group>"; };
 		19A25F7E2BC4D23900030139 /* LBAppManagerCenter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LBAppManagerCenter.m; sourceTree = "<group>"; };
 		19A25F802BC4DC7C00030139 /* LBWebPageTabManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LBWebPageTabManager.h; sourceTree = "<group>"; };
@@ -156,6 +191,25 @@
 		19AE579E2BC29B5300422E01 /* LBTabWebCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LBTabWebCollectionViewCell.h; sourceTree = "<group>"; };
 		19AE579F2BC29B5300422E01 /* LBTabWebCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LBTabWebCollectionViewCell.m; sourceTree = "<group>"; };
 		19C225E12BF1AAD8008E9B94 /* AppTrackingTransparency.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppTrackingTransparency.framework; path = System/Library/Frameworks/AppTrackingTransparency.framework; sourceTree = SDKROOT; };
+		19C225E72BF36296008E9B94 /* Lettuce Browser-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Lettuce Browser-Bridging-Header.h"; sourceTree = "<group>"; };
+		19C225E82BF36296008E9B94 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		19C225E92BF36296008E9B94 /* CacheUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CacheUtil.swift; sourceTree = "<group>"; };
+		19C225EA2BF36296008E9B94 /* BaseRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseRequest.swift; sourceTree = "<group>"; };
+		19C225EB2BF36296008E9B94 /* ReachabilityUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReachabilityUtil.swift; sourceTree = "<group>"; };
+		19C225EC2BF36296008E9B94 /* Request+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Request+Ext.swift"; sourceTree = "<group>"; };
+		19C225F42BF49869008E9B94 /* TBARequestManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TBARequestManager.h; sourceTree = "<group>"; };
+		19C225F52BF49869008E9B94 /* TBARequestManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TBARequestManager.m; sourceTree = "<group>"; };
+		19C225FE2BF5A384008E9B94 /* FirebaseManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
+		19C225FF2BF5A384008E9B94 /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
+		19C226002BF5A384008E9B94 /* Property.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Property.swift; sourceTree = "<group>"; };
+		19C226082BF60377008E9B94 /* LBADOpenManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LBADOpenManager.h; sourceTree = "<group>"; };
+		19C226092BF60377008E9B94 /* LBADOpenManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LBADOpenManager.m; sourceTree = "<group>"; };
+		19C2260B2BF60B57008E9B94 /* LBADNativeManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LBADNativeManager.h; sourceTree = "<group>"; };
+		19C2260C2BF60B57008E9B94 /* LBADNativeManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LBADNativeManager.m; sourceTree = "<group>"; };
+		19C2260E2BF60B64008E9B94 /* LBADInterstitialManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LBADInterstitialManager.h; sourceTree = "<group>"; };
+		19C2260F2BF60B64008E9B94 /* LBADInterstitialManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LBADInterstitialManager.m; sourceTree = "<group>"; };
+		19C226112BF6177B008E9B94 /* LBNativeView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LBNativeView.h; sourceTree = "<group>"; };
+		19C226122BF6177B008E9B94 /* LBNativeView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LBNativeView.m; sourceTree = "<group>"; };
 		19D68F652BC6319B0038E873 /* LBVpnViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LBVpnViewController.h; sourceTree = "<group>"; };
 		19D68F662BC6319B0038E873 /* LBVpnViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LBVpnViewController.m; sourceTree = "<group>"; };
 		19D68F6A2BC6347D0038E873 /* LBVpnSmartServerEntrenceVIew.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LBVpnSmartServerEntrenceVIew.h; sourceTree = "<group>"; };
@@ -238,7 +292,13 @@
 		195834542BBCEC6F00078C6C /* Lettuce Browser */ = {
 			isa = PBXGroup;
 			children = (
+				19598F882BFDFA04005F2063 /* Pro - FirebaseInfo */,
+				199573622BFC9C4C00796F3F /* Debug - FirebaseInfo */,
 				19D68F952BC779580038E873 /* Lettuce Browser.entitlements */,
+				199573552BFB288100796F3F /* admob_debug.json */,
+				19598F8B2BFDFB2C005F2063 /* admob_pro.json */,
+				19C226072BF5FD46008E9B94 /* GoogleAD */,
+				19C225E32BF33C4B008E9B94 /* TBAManager */,
 				19D68F642BC631800038E873 /* Vpn */,
 				19A25F7C2BC4D22200030139 /* AppManager */,
 				19AE57992BC29AE700422E01 /* TabManager */,
@@ -285,6 +345,51 @@
 				19AE577E2BC270B100422E01 /* toast */,
 			);
 			path = Util;
+			sourceTree = "<group>";
+		};
+		19598F882BFDFA04005F2063 /* Pro - FirebaseInfo */ = {
+			isa = PBXGroup;
+			children = (
+				19598F892BFDFA21005F2063 /* GoogleService-Info.plist */,
+			);
+			path = "Pro - FirebaseInfo";
+			sourceTree = "<group>";
+		};
+		199573522BF9DF9000796F3F /* Cloak */ = {
+			isa = PBXGroup;
+			children = (
+				199573532BF9DFB600796F3F /* LBCloakRequest.swift */,
+			);
+			path = Cloak;
+			sourceTree = "<group>";
+		};
+		199573572BFB319E00796F3F /* ADUtil */ = {
+			isa = PBXGroup;
+			children = (
+				1995735E2BFB485200796F3F /* Model */,
+				199573582BFB31B300796F3F /* NSObject+PositionTag.h */,
+				199573592BFB31B300796F3F /* NSObject+PositionTag.m */,
+				1995735B2BFB31FB00796F3F /* LBGoogleADUtil.h */,
+				1995735C2BFB31FB00796F3F /* LBGoogleADUtil.m */,
+			);
+			path = ADUtil;
+			sourceTree = "<group>";
+		};
+		1995735E2BFB485200796F3F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				1995735F2BFB486A00796F3F /* LBGoogleADConfigModel.h */,
+				199573602BFB486A00796F3F /* LBGoogleADConfigModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		199573622BFC9C4C00796F3F /* Debug - FirebaseInfo */ = {
+			isa = PBXGroup;
+			children = (
+				199573632BFC9CED00796F3F /* GoogleService-Info.plist */,
+			);
+			path = "Debug - FirebaseInfo";
 			sourceTree = "<group>";
 		};
 		19A25F7C2BC4D22200030139 /* AppManager */ = {
@@ -468,6 +573,75 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		19C225E32BF33C4B008E9B94 /* TBAManager */ = {
+			isa = PBXGroup;
+			children = (
+				199573522BF9DF9000796F3F /* Cloak */,
+				19C225FD2BF5A36C008E9B94 /* Util */,
+				19C225E82BF36296008E9B94 /* API.swift */,
+				19C225EA2BF36296008E9B94 /* BaseRequest.swift */,
+				19C225E92BF36296008E9B94 /* CacheUtil.swift */,
+				19C225EB2BF36296008E9B94 /* ReachabilityUtil.swift */,
+				19C225EC2BF36296008E9B94 /* Request+Ext.swift */,
+				199573652BFD8B7500796F3F /* ADBaseModel.swift */,
+				19C225E72BF36296008E9B94 /* Lettuce Browser-Bridging-Header.h */,
+				19C225F42BF49869008E9B94 /* TBARequestManager.h */,
+				19C225F52BF49869008E9B94 /* TBARequestManager.m */,
+			);
+			path = TBAManager;
+			sourceTree = "<group>";
+		};
+		19C225FD2BF5A36C008E9B94 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				19C225FE2BF5A384008E9B94 /* FirebaseManager.swift */,
+				199573502BF77F6C00796F3F /* LBTBALogManager.swift */,
+				19C225FF2BF5A384008E9B94 /* Helper.swift */,
+				19C226002BF5A384008E9B94 /* Property.swift */,
+			);
+			path = Util;
+			sourceTree = "<group>";
+		};
+		19C226042BF5FCC5008E9B94 /* ADOpen */ = {
+			isa = PBXGroup;
+			children = (
+				19C226082BF60377008E9B94 /* LBADOpenManager.h */,
+				19C226092BF60377008E9B94 /* LBADOpenManager.m */,
+			);
+			path = ADOpen;
+			sourceTree = "<group>";
+		};
+		19C226052BF5FCD1008E9B94 /* ADNative */ = {
+			isa = PBXGroup;
+			children = (
+				19C2260B2BF60B57008E9B94 /* LBADNativeManager.h */,
+				19C2260C2BF60B57008E9B94 /* LBADNativeManager.m */,
+				19C226112BF6177B008E9B94 /* LBNativeView.h */,
+				19C226122BF6177B008E9B94 /* LBNativeView.m */,
+			);
+			path = ADNative;
+			sourceTree = "<group>";
+		};
+		19C226062BF5FCDB008E9B94 /* ADInterstitial */ = {
+			isa = PBXGroup;
+			children = (
+				19C2260E2BF60B64008E9B94 /* LBADInterstitialManager.h */,
+				19C2260F2BF60B64008E9B94 /* LBADInterstitialManager.m */,
+			);
+			path = ADInterstitial;
+			sourceTree = "<group>";
+		};
+		19C226072BF5FD46008E9B94 /* GoogleAD */ = {
+			isa = PBXGroup;
+			children = (
+				199573572BFB319E00796F3F /* ADUtil */,
+				19C226062BF5FCDB008E9B94 /* ADInterstitial */,
+				19C226052BF5FCD1008E9B94 /* ADNative */,
+				19C226042BF5FCC5008E9B94 /* ADOpen */,
+			);
+			path = GoogleAD;
+			sourceTree = "<group>";
+		};
 		19D68F642BC631800038E873 /* Vpn */ = {
 			isa = PBXGroup;
 			children = (
@@ -602,6 +776,7 @@
 				195834502BBCEC6F00078C6C /* Resources */,
 				19D68F942BC779290038E873 /* Embed Foundation Extensions */,
 				9183E5AFF95695E3EAB0C5D3 /* [CP] Embed Pods Frameworks */,
+				3667D0F4BC7C5822DB5E6312 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -642,6 +817,7 @@
 				TargetAttributes = {
 					195834512BBCEC6F00078C6C = {
 						CreatedOnToolsVersion = 15.3;
+						LastSwiftMigration = 1530;
 					};
 					19D68F842BC779290038E873 = {
 						CreatedOnToolsVersion = 15.3;
@@ -675,9 +851,12 @@
 			files = (
 				195834622BBCEC7100078C6C /* Assets.xcassets in Resources */,
 				195834652BBCEC7100078C6C /* Base in Resources */,
+				19598F8F2BFE0048005F2063 /* GoogleService-Info.plist in Resources */,
 				19AE57952BC290E500422E01 /* terms of user.rtf in Resources */,
+				199573562BFB288100796F3F /* admob_debug.json in Resources */,
 				19AE57932BC2879C00422E01 /* privacy policy.rtf in Resources */,
 				195834602BBCEC6F00078C6C /* Base in Resources */,
+				19598F8C2BFDFB2C005F2063 /* admob_pro.json in Resources */,
 				313618CBA5FDC39131D9C7CA /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -692,6 +871,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		3667D0F4BC7C5822DB5E6312 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Lettuce Browser/Pods-Lettuce Browser-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Lettuce Browser/Pods-Lettuce Browser-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Lettuce Browser/Pods-Lettuce Browser-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		7B221B07F59BD28B3B11A277 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -764,24 +960,40 @@
 				19D68F722BC67C3F0038E873 /* LBSmartServerViewController.m in Sources */,
 				EB5330F42BC044BD009C172F /* LBSettingListModel.m in Sources */,
 				19AE57862BC270C800422E01 /* LBToastConfig.m in Sources */,
+				19C225EE2BF36296008E9B94 /* CacheUtil.swift in Sources */,
+				19C2260A2BF60377008E9B94 /* LBADOpenManager.m in Sources */,
 				19AE579C2BC29AF900422E01 /* LBTabManagerView.m in Sources */,
 				19AE577D2BC26A0900422E01 /* LBCleanView.m in Sources */,
+				19C2260D2BF60B57008E9B94 /* LBADNativeManager.m in Sources */,
 				19D68F672BC6319B0038E873 /* LBVpnViewController.m in Sources */,
 				EB5330ED2BBEF9B1009C172F /* LBSearchBottomToolbar.m in Sources */,
 				19AE57692BBD284A00422E01 /* LBBootProgressView.m in Sources */,
+				19C226132BF6177B008E9B94 /* LBNativeView.m in Sources */,
 				19AE576C2BBD362F00422E01 /* LBBootLoadingView.m in Sources */,
+				1995735D2BFB31FB00796F3F /* LBGoogleADUtil.m in Sources */,
 				19AE57752BBD65BE00422E01 /* LBIconListView.m in Sources */,
+				19C225F62BF49869008E9B94 /* TBARequestManager.m in Sources */,
+				199573662BFD8B7500796F3F /* ADBaseModel.swift in Sources */,
+				199573612BFB486A00796F3F /* LBGoogleADConfigModel.m in Sources */,
 				EB5330F02BC0313E009C172F /* LBSettingPopView.m in Sources */,
 				195834572BBCEC6F00078C6C /* AppDelegate.m in Sources */,
+				199573512BF77F6C00796F3F /* LBTBALogManager.swift in Sources */,
+				19C225EF2BF36296008E9B94 /* BaseRequest.swift in Sources */,
+				19C226022BF5A384008E9B94 /* Helper.swift in Sources */,
 				19A25F822BC4DC7D00030139 /* LBWebPageTabManager.m in Sources */,
+				19C225F02BF36296008E9B94 /* ReachabilityUtil.swift in Sources */,
 				19D68F7D2BC685030038E873 /* LBVpnModel.m in Sources */,
+				19C226012BF5A384008E9B94 /* FirebaseManager.swift in Sources */,
 				19D68F6F2BC662F90038E873 /* LBVpnStatusView.m in Sources */,
 				19D68F802BC698C10038E873 /* LBSmartServerResultViewController.m in Sources */,
 				19D68F792BC683C50038E873 /* LBSmartServerCollectionViewCell.m in Sources */,
 				195834712BBCF0BB00078C6C /* LBSearchViewController.m in Sources */,
 				19AE57872BC270C800422E01 /* LBToast.m in Sources */,
+				19C225F12BF36296008E9B94 /* Request+Ext.swift in Sources */,
+				199573542BF9DFB600796F3F /* LBCloakRequest.swift in Sources */,
 				19D68F6C2BC6347D0038E873 /* LBVpnSmartServerEntrenceVIew.m in Sources */,
 				19A416B62BC7CCB700F70DA2 /* LBVpnUtil.m in Sources */,
+				19C226032BF5A384008E9B94 /* Property.swift in Sources */,
 				19AE57642BBD242C00422E01 /* UIColor+LBHex.m in Sources */,
 				19A25F872BC4E3A600030139 /* UIView+Util.m in Sources */,
 				19AE57792BC23A3A00422E01 /* LBAlertView.m in Sources */,
@@ -794,8 +1006,11 @@
 				19A25F7F2BC4D23900030139 /* LBAppManagerCenter.m in Sources */,
 				19AE57902BC27BB700422E01 /* NSObject+JJCController.m in Sources */,
 				19AE57982BC2910D00422E01 /* LBTermsOfUserView.m in Sources */,
+				19C225ED2BF36296008E9B94 /* API.swift in Sources */,
 				19A25F8E2BC56CDC00030139 /* LBVPNAlerNotiView.m in Sources */,
+				1995735A2BFB31B300796F3F /* NSObject+PositionTag.m in Sources */,
 				19AE57A02BC29B5300422E01 /* LBTabWebCollectionViewCell.m in Sources */,
+				19C226102BF60B64008E9B94 /* LBADInterstitialManager.m in Sources */,
 				195834772BBCF83E00078C6C /* LBScreenAdapter.m in Sources */,
 				19AE578C2BC2747700422E01 /* LBPrivacyPolicyView.m in Sources */,
 			);
@@ -893,7 +1108,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -948,7 +1163,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -964,6 +1179,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "Lettuce Browser/Lettuce Browser.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
@@ -987,16 +1203,19 @@
 				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleLightContent;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.lettucebrowser.iosyaho;
+				MARKETING_VERSION = 2.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lettucebrowser.iostuitui;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "Lettuce Browser/TBAManager/Lettuce Browser-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -1008,6 +1227,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "Lettuce Browser/Lettuce Browser.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
@@ -1031,16 +1251,18 @@
 				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleLightContent;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.lettucebrowser.iosyaho;
+				MARKETING_VERSION = 2.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lettucebrowser.iostuitui;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "Lettuce Browser/TBAManager/Lettuce Browser-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -1051,8 +1273,10 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = LBFlashVPN/LBFlashVPN.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1063,14 +1287,14 @@
 				INFOPLIST_FILE = LBFlashVPN/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = LBFlashVPN;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.lettucebrowser.iosyaho.proxy;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lettucebrowser.iostuitui.proxy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
@@ -1088,8 +1312,10 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = LBFlashVPN/LBFlashVPN.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1100,14 +1326,14 @@
 				INFOPLIST_FILE = LBFlashVPN/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = LBFlashVPN;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.lettucebrowser.iosyaho.proxy;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lettucebrowser.iostuitui.proxy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;

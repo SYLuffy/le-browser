@@ -6,6 +6,7 @@
 //
 
 #import "LBCleanView.h"
+#import "Lettuce_Browser-Swift.h"
 
 @interface LBCleanView ()<CAAnimationDelegate>
 
@@ -20,10 +21,11 @@
 + (LBCleanView *)showCleanLoadingWithSuperView:(UIView *)superView {
     LBCleanView * cleanView = [[LBCleanView alloc] init];
     if (!superView) {
-        [[UIApplication sharedApplication].windows.lastObject addSubview:cleanView];
+        [[UIApplication sharedApplication].windows.firstObject addSubview:cleanView];
     }else {
         [superView addSubview:cleanView];
     }
+    [LBTBALogManager objcLogEventWithName:@"session_start" params:nil];
     return cleanView;
 }
 
@@ -91,10 +93,22 @@
 
 - (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag {
     if (flag) {
+        [LBTBALogManager objcLogEventWithName:@"pro_cleanDone" params:nil];
         [[LBWebPageTabManager shareInstance] removeAllWebTab];
-        [self removeFromSuperview];
-        [[LBWebPageTabManager shareInstance] addNewSerchVC:nil];
-        [LBToast showMessage:@"Clean up successfully" duration:2 finishHandler:nil];
+        if ([CacheUtil objecGetUserGo]) {
+            [LBADInterstitialManager shareInstance].ADDismissBlock = ^{
+                [self removeFromSuperview];
+                [[LBWebPageTabManager shareInstance] addNewSerchVC:nil];
+                [LBToast showMessage:@"Clean up successfully" duration:2 finishHandler:nil];
+                [LBTBALogManager objcLogEventWithName:@"pro_cleanToast" params:@{@"bro":@3}];
+            };
+            [[LBADInterstitialManager shareInstance] showAd:LBADPositionBack];
+        }else {
+            [self removeFromSuperview];
+            [[LBWebPageTabManager shareInstance] addNewSerchVC:nil];
+            [LBToast showMessage:@"Clean up successfully" duration:2 finishHandler:nil];
+            [LBTBALogManager objcLogEventWithName:@"pro_cleanToast" params:@{@"bro":@3}];
+        }
     }else {
         [self startLoadinganimation];
     }

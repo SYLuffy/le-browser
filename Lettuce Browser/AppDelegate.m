@@ -9,6 +9,8 @@
 #import "LBSearchViewController.h"
 #import "LBBootLoadingView.h"
 #import <AppTrackingTransparency/AppTrackingTransparency.h>
+#import "LBADOpenManager.h"
+#import <Firebase/Firebase.h>
 
 @interface AppDelegate ()
 
@@ -19,12 +21,15 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
+    [FIRApp configure];
+    [LBGoogleADUtil shareInstance];
     [LBVpnUtil.shareInstance load:nil];
     ///初始化tab管理器
     LBWebPageTabModel * model = [[LBWebPageTabManager shareInstance] getFirstTabModel];
     [LBAppManagerCenter shareInstance];
+    [[LBADOpenManager shareInstance] loadAd];
     
-    LBSearchViewController * homeVC = [[LBSearchViewController alloc] initWithStartMode:LBHomeStartModeCold fromModel:model];
+    LBSearchViewController * homeVC = [[LBSearchViewController alloc] initWithStartMode:LBHomeStartModeCold fromModel:model isAppdelegate:YES];
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.rootViewController = homeVC;
     [self.window makeKeyAndVisible];

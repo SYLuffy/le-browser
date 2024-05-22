@@ -7,6 +7,7 @@
 
 #import "LBVPNAlerNotiView.h"
 #import "LBVpnViewController.h"
+#import "Lettuce_Browser-Swift.h"
 
 @interface LBVPNAlerNotiView ()
 
@@ -25,10 +26,11 @@
     LBVPNAlerNotiView * alertVM = [[LBVPNAlerNotiView alloc] init];
     alertVM.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.7];
     if (!superView) {
-        [[UIApplication sharedApplication].windows.lastObject addSubview:alertVM];
+        [[UIApplication sharedApplication].windows.firstObject addSubview:alertVM];
     }else {
         [superView addSubview:alertVM];
     }
+    [LBTBALogManager objcLogEventWithName:@"pro_pop" params:nil];
     return alertVM;
 }
 
@@ -103,10 +105,16 @@
 }
 
 - (void)configmClicked:(UIButton *)sender {
+    [LBTBALogManager objcLogEventWithName:@"pro_pop1" params:nil];
     [self dismiss];
     LBVpnViewController * vpnVc = [[LBVpnViewController alloc] initWithNeedStartConnect:YES];
     vpnVc.modalPresentationStyle = UIModalPresentationFullScreen;
     [[self jjc_getCurrentUIVC] presentViewController:vpnVc animated:YES completion:nil];
+}
+
+- (void)cancelClicked:(UIButton *)sender {
+    [LBTBALogManager objcLogEventWithName:@"pro_pop0" params:nil];
+    [self dismiss];
 }
 
 - (void)dismiss {
@@ -154,7 +162,7 @@
         [_cancelButton setTitleColor:[UIColor LB_colorWithHex:0xffFFFFFF] forState:UIControlStateNormal];
         [_cancelButton setTitleColor:[[UIColor LB_colorWithHex:0xffFFFFFF] colorWithAlphaComponent:0.5] forState:UIControlStateDisabled];
         _cancelButton.layer.cornerRadius = LBAdapterHeight(20);
-        [_cancelButton addTarget:self action:@selector(dismiss) forControlEvents:UIControlEventTouchUpInside];
+        [_cancelButton addTarget:self action:@selector(cancelClicked:) forControlEvents:UIControlEventTouchUpInside];
         _cancelButton.clipsToBounds = YES;
         _cancelButton.enabled = NO;
     }

@@ -6,6 +6,8 @@
 //
 
 #import "LBSmartServerResultViewController.h"
+#import "LBNativeView.h"
+#import "Lettuce_Browser-Swift.h"
 
 @interface LBSmartServerResultViewController ()
 
@@ -15,6 +17,7 @@
 @property (nonatomic, strong)UIImageView * typeImgView;
 @property (nonatomic, strong)UILabel * textLabel;
 @property (nonatomic, strong)UILabel * timeLabel;
+@property (nonatomic, strong)LBNativeView * nativeADView;
 
 @end
 
@@ -22,6 +25,11 @@
 
 - (void)dealloc {
     [self removeVpnKeepTimeObserver];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [LBTBALogManager objcLogEventWithName:@"session_start" params:nil];
 }
 
 - (instancetype)initWithSmartType:(LBSmartType)smartType {
@@ -36,6 +44,16 @@
     [super viewDidLoad];
      
     [self initializeAppearance];
+    [self logEvent];
+}
+
+/// 埋点
+- (void)logEvent {
+    if (self.smartType == LBSmartTypeSuccessed) {
+        [LBTBALogManager objcLogEventWithName:@"pro_re1" params:nil];
+    }else {
+        [LBTBALogManager objcLogEventWithName:@"pro_re2" params:nil];
+    }
 }
 
 - (void)initializeAppearance {
@@ -45,6 +63,7 @@
     [self.view addSubview:self.typeImgView];
     [self.view addSubview:self.textLabel];
     [self.view addSubview:self.timeLabel];
+    [self.view addSubview:self.nativeADView];
     
     [self.backButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.height.mas_equalTo(LBAdapterHeight(20));
@@ -76,6 +95,18 @@
         make.centerX.mas_equalTo(self.view.mas_centerX);
         make.height.mas_equalTo(LBAdapterHeight(30));
         make.top.mas_equalTo(self.textLabel.mas_bottom).offset(LBAdapterHeight(19));
+    }];
+    
+    [self.nativeADView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.mas_equalTo(self.view.mas_bottom).offset(LBAdapterHeight(-38));
+        make.left.mas_equalTo(self.view.mas_left).offset(LBAdapterHeight(20));
+        make.right.mas_equalTo(self.view.mas_right).offset(LBAdapterHeight(-20));
+    }];
+    
+    __weak typeof(self) weakSelf = self;
+    [[LBADNativeManager shareInstance] showNativeAd:LBADPositionResultNative showLocation:LBADShowLocationResultPage searchTabKey:nil showNativeBlock:^(GADNativeAd * _Nullable nativeAD) {
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        [strongSelf.nativeADView configGADNativeAd:nativeAD];
     }];
     
     [self updatePageMode];
@@ -120,7 +151,19 @@
 }
 
 - (void)backClicked:(UIButton *)sender {
-    [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+    if (self.smartType == LBSmartTypeSuccessed) {
+        [LBTBALogManager objcLogEventWithName:@"pro_re1_back" params:nil];
+    }else {
+        [LBTBALogManager objcLogEventWithName:@"pro_re2_back" params:nil];
+    }
+    if ([CacheUtil objecGetUserGo]) {
+        [LBADInterstitialManager shareInstance].ADDismissBlock = ^{
+            [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+        };
+        [[LBADInterstitialManager shareInstance] showAd:LBADPositionBack];
+    }else {
+        [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+    }
 }
 
 #pragma mark - Getter
@@ -167,6 +210,14 @@
         _timeLabel.textAlignment = NSTextAlignmentCenter;
     }
     return _timeLabel;
+}
+
+- (LBNativeView *)nativeADView {
+    if (!_nativeADView) {
+        _nativeADView = [[LBNativeView alloc] init];
+        [_nativeADView configGADNativeAd:nil];
+    }
+    return _nativeADView;
 }
 
 @end

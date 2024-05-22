@@ -6,10 +6,12 @@
 //
 
 #import "LBIconListView.h"
+#import "Lettuce_Browser-Swift.h"
 
 @interface LBIconListView ()
 
 @property (nonatomic, copy) NSArray * urlArrays;
+@property (nonatomic, copy) NSArray * tabLogArrays;
 
 @end
 
@@ -27,6 +29,7 @@
     NSArray * iconArrays = @[@"home_search_douyin",@"home_search_whatsApp",@"home_search_youtube",@"home_search_twitter",@"home_search_amazon",@"home_search_camera",@"home_search_facebook",@"home_search_google"];
     NSArray * iconNameArrays = @[@"TikTok",@"WhatsApp",@"YouTube",@"Twitter",@"Amazon",@"Instagram",@"Facebook",@"Google"];
     self.urlArrays = @[@"https://www.tiktok.com",@"https://www.whatsapp.com",@"https://www.youtube.com",@"https://www.twitter.com",@"https://www.amazon.com",@"https://www.instagram.com",@"https://www.facebook.com",@"https://www.google.com"];
+    self.tabLogArrays = @[@"tiktok",@"whatsapp",@"youtube",@"twitter",@"amazon",@"instagram",@"facebook",@"google"];
     
     CGFloat realWidth = LBAdapterWidth(62);
     CGFloat realHeight = LBAdapterHeight(70);
@@ -63,6 +66,8 @@
 
 - (void)buttonClicked:(UIButton *)sender {
     NSString * url = self.urlArrays[sender.tag];
+    NSString * tbaName = self.tabLogArrays[sender.tag];
+    [LBTBALogManager objcLogEventWithName:@"pro_nav" params:@{@"bro":tbaName}];
     if (self.iconClickBlock) {
         self.iconClickBlock(url);
     }

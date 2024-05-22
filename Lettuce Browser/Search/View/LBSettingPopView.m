@@ -11,6 +11,7 @@
 #import "LBPrivacyPolicyView.h"
 #import "LBTermsOfUserView.h"
 #import <StoreKit/StoreKit.h>
+#import "Lettuce_Browser-Swift.h"
 
 @interface LBSettingPopView () <UITableViewDataSource, UITableViewDelegate>
 
@@ -36,7 +37,7 @@
     popView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.7];
     popView.tabWebModel = tabWebModel;
     if (!superView) {
-        [[UIApplication sharedApplication].windows.lastObject addSubview:popView];
+        [[UIApplication sharedApplication].windows.firstObject addSubview:popView];
     }else {
         [superView addSubview:popView];
     }
@@ -152,13 +153,16 @@
 - (void)buttonClicked:(UIButton *)sender {
     switch (sender.tag) {
         case LBSettingPopTypeAddNew:
+            [LBTBALogManager objcLogEventWithName:@"pro_clickTab" params:@{@"bro":@"setting"}];
             [self dismiss];
             [[LBWebPageTabManager shareInstance] addNewSerchVC:nil];
             break;
         case LBSettingPopTypeShare:
+            [LBTBALogManager objcLogEventWithName:@"pro_share" params:nil];
             [self shareContent];
             break;
         case LBSettingPopTypeCopy: {
+            [LBTBALogManager objcLogEventWithName:@"pro_copy" params:nil];
             NSString * stringToCopy = self.tabWebModel.url;
             NSString * toastString = @"There is currently no linked content to copy！";
             if (stringToCopy && stringToCopy.length > 0) {

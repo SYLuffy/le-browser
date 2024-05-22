@@ -9,6 +9,8 @@
 #define LBPrefixHeader_pch
 
 #import <Masonry/Masonry.h>
+#import <YYModel/YYModel.h>
+#import "LBGoogleADConfigModel.h"
 #import "LBScreenAdapter.h"
 #import "UIColor+LBHex.h"
 #import "LBToast.h"
@@ -17,10 +19,15 @@
 #import "UIView+Util.h"
 #import "LBWebPageTabManager.h"
 #import "LBVpnUtil.h"
+#import "LBGoogleADUtil.h"
+#import "LBADNativeManager.h"
+#import "LBADInterstitialManager.h"
+#import "LBADOpenManager.h"
 
 
 static NSString * const kReconnectionVpnNoti = @"kReconnectionVpnNoti";
-static NSString * lb_providerBundleIdentifier = @"com.darkios.lettucebrowser.sy.proxy";
+
+#define AllLogEvent(eventName, params) [LBTBALogManager logEvent:eventName params:params]
 
 #ifdef DEBUG
 #define LBDebugLog(message) NSLog(@"类名:%@ \n 方法名%@ \n 代码行数:%d \n输出信息:%@", NSStringFromClass([self class]), NSStringFromSelector(_cmd), __LINE__, (message))

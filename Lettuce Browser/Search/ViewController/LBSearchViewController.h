@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface LBSearchViewController : UIViewController
 
-- (instancetype)initWithStartMode:(LBHomeStartMode)startMode fromModel:(nullable LBWebPageTabModel *)fromModel;
+- (instancetype)initWithStartMode:(LBHomeStartMode)startMode fromModel:(nullable LBWebPageTabModel *)fromModel isAppdelegate:(BOOL)isAppdelegate;
 
 @end
 

@@ -15,8 +15,9 @@
 #import "LBAlertView.h"
 #import "LBTabManagerView.h"
 #import "LBVPNEntranceView.h"
-#import <AFNetworking/AFNetworking.h>
 #import "LBVpnUtil.h"
+#import "LBNativeView.h"
+#import "Lettuce_Browser-Swift.h"
 
 @interface LBSearchViewController () <WKNavigationDelegate, WKUIDelegate>
 
@@ -35,21 +36,26 @@
 @property (nonatomic, strong)UIButton * fullScrennButton;
 @property (nonatomic, assign)BOOL isLoadFinishPage;
 @property (nonatomic, strong)NSString * lastWebUrl;
+@property (nonatomic, strong)LBNativeView * nativeADView;
+/// 是不是从冷启动加载的搜索页
+@property (nonatomic, assign)BOOL isAppdelegate;
 
 @end
 
 @implementation LBSearchViewController
 
 - (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     [self.webView removeObserver:self forKeyPath:@"estimatedProgress"];
 }
 
-- (instancetype)initWithStartMode:(LBHomeStartMode)startMode fromModel:(LBWebPageTabModel *)fromModel{
+- (instancetype)initWithStartMode:(LBHomeStartMode)startMode fromModel:(LBWebPageTabModel *)fromModel isAppdelegate:(BOOL)isAppdelegate{
     self = [super init];
     if (self) {
         if (fromModel) {
             self.isFromModel = YES;
         }
+        self.isAppdelegate = isAppdelegate;
         self.currentModel = fromModel;
         self.currentStartMode = startMode;
     }
@@ -68,7 +74,10 @@
             [self loadFromModel];
         }else {
             self.currentModel = [[LBWebPageTabManager shareInstance] addNewWebTabScreenShot:[self.contentView takeScreenshot]];
+            [self updateNativeAd];
         }
+    }else {
+        [self updateNativeAd];
     }
     [self.bottomToolbar updateToolBarTabCount];
 }
@@ -81,6 +90,7 @@
     if (self.currentStartMode == LBHomeStartModeCold) {
         [LBBootLoadingView showLoadingMode:LBLoadingModeColdBoot superView:self.view];
     }
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateNativeAd) name:kDismissNotification object:nil];
 }
 
 - (void)initializeAppearance {
@@ -91,6 +101,7 @@
     [self.contentView addSubview:self.bottomToolbar];
     [self.contentView addSubview:self.webView];
     [self.contentView addSubview:self.coverLoadingView];
+    [self.contentView addSubview:self.nativeADView];
     [self.view addSubview:self.fullScrennButton];
     [self addConstraint];
     [self allEventHandler];
@@ -108,14 +119,21 @@
         make.top.left.right.mas_equalTo(self.contentView);
         make.height.mas_equalTo(LBAdapterHeight(196));
     }];
+    
+    CGFloat topPadding = 24;
+    CGFloat vpnTopPadding = 34;
+    if (!kLBIsIphoneX) {
+        topPadding = 20;
+        vpnTopPadding = 28;
+    }
     [self.vpnEntranceView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.mas_equalTo(LBAdapterHeight(335));
         make.height.mas_equalTo(LBAdapterHeight(100));
-        make.top.mas_equalTo(self.searchTopView.mas_bottom).offset(LBAdapterHeight(24));
+        make.top.mas_equalTo(self.searchTopView.mas_bottom).offset(LBAdapterHeight(topPadding));
         make.centerX.mas_equalTo(self.view);
     }];
     [self.iconListView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.vpnEntranceView.mas_bottom).offset(LBAdapterHeight(34));
+        make.top.mas_equalTo(self.vpnEntranceView.mas_bottom).offset(LBAdapterHeight(vpnTopPadding));
         make.left.mas_equalTo(self.contentView.mas_left).offset(LBAdapterHeight(32));
         make.right.mas_equalTo(self.contentView.mas_right).offset(LBAdapterHeight(-32));
         make.height.mas_equalTo(LBAdapterHeight(168));
@@ -134,6 +152,34 @@
     [self.coverLoadingView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(self.webView);
     }];
+    
+    CGFloat bottomPadding = -18;
+    if (!kLBIsIphoneX) {
+        bottomPadding = -13;
+    }
+    [self.nativeADView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self.contentView.mas_left).offset(LBAdapterHeight(20));
+        make.right.mas_equalTo(self.contentView.mas_right).offset(LBAdapterHeight(-20));
+        make.bottom.mas_equalTo(self.bottomToolbar.mas_top).offset(LBAdapterHeight(bottomPadding));
+        make.centerX.mas_equalTo(self.contentView.mas_centerX);
+    }];
+}
+
+- (void)updateNativeAd {
+    ///如果当前上层有 开屏广告，不展示首页广告
+    if ([LBADOpenManager shareInstance].isShowingAd) {
+        return;
+    }
+    [LBTBALogManager objcLogEventWithName:@"pro_impress" params:nil];
+    [LBTBALogManager objcLogEventWithName:@"session_start" params:nil];
+    
+    if (!self.nativeADView.hidden) {
+        __weak typeof(self) weakSelf = self;
+        [[LBADNativeManager shareInstance] showNativeAd:LBADPositionHomeNative showLocation:LBADShowLocationHomePage searchTabKey:self.currentModel.tabKey showNativeBlock:^(GADNativeAd * _Nullable nativeAD) {
+            __strong typeof(weakSelf) strongSelf = weakSelf;
+            [strongSelf.nativeADView configGADNativeAd:nativeAD];
+        }];
+    }
 }
 
 /// 处理各个模块的事件回调
@@ -155,6 +201,7 @@
                 [strongSelf.webView goForward];
                 break;
             case LBToolbarTypeClean:
+                [LBTBALogManager objcLogEventWithName:@"pro_clean" params:nil];
                 [LBAlertView showWithSuperView:nil];
                 break;
             case LBToolbarTypeSetting: {
@@ -163,7 +210,10 @@
                 break;
             case LBToolbarTypeTag: {
                 [strongSelf updateTabModelContent];
-                [LBTabManagerView popShowWithSuperView:nil fromModel:strongSelf.currentModel];
+                LBTabManagerView * tabManagerVM = [LBTabManagerView popShowWithSuperView:nil fromModel:strongSelf.currentModel];
+                tabManagerVM.backToBlock = ^{
+                    [strongSelf updateNativeAd];
+                };
             }
                 break;
             default:
@@ -252,6 +302,11 @@
         }else {
             [self loadUrlString:self.currentModel.url];
         }
+    }else {
+        if (!self.isAppdelegate) {
+            [self updateNativeAd];
+            self.isAppdelegate = NO;
+        }
     }
 }
 
@@ -272,21 +327,6 @@
 }
 
 - (void)showWebView:(BOOL)isShow {
-//    if (isShow) {
-//        [self.searchTopView mas_remakeConstraints:^(MASConstraintMaker *make) {
-//            make.centerX.mas_equalTo(self.view.mas_centerX);
-//            make.left.right.mas_equalTo(self.view);
-//            make.top.mas_equalTo(self.view.mas_top).offset(LBAdapterHeight(-70));
-//            make.height.mas_equalTo(LBAdapterHeight(196));
-//        }];
-//    }else {
-//        [self.searchTopView mas_remakeConstraints:^(MASConstraintMaker *make) {
-//            make.centerX.mas_equalTo(self.view.mas_centerX);
-//            make.top.left.right.mas_equalTo(self.view);
-//            make.height.mas_equalTo(LBAdapterHeight(196));
-//        }];
-//        [self clearCurrentWebViewData:self.webView];
-//    }
     if (!self.isLoadFinishPage && isShow) {
         self.coverLoadingView.hidden = NO;
     }else {
@@ -295,6 +335,10 @@
     self.iconListView.hidden = isShow;
     self.vpnEntranceView.hidden = isShow;
     self.webView.hidden = !isShow;
+    self.nativeADView.hidden = isShow;
+    if (!isShow) {
+        [self updateNativeAd];
+    }
     if (!isShow) {
         self.currentUrl = @"";
 #pragma clang diagnostic push
@@ -336,6 +380,7 @@
     [self.bottomToolbar updateToolBarState:webView];
     [self.searchTopView updateWebviewLoading:webView];
     if (webView.loading && webView.URL) {
+        [LBTBALogManager objcLogEventWithName:@"pro_requist" params:nil];
         NSString * urlString = webView.URL.absoluteString;
         if (urlString) {
             self.lastWebUrl = self.currentUrl;
@@ -345,6 +390,8 @@
 }
     
 - (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation {
+    NSInteger loadTime = arc4random_uniform(4) + 1;
+    [LBTBALogManager objcLogEventWithName:@"pro_load" params:@{@"bro":@(loadTime)}];
     [self.bottomToolbar updateToolBarState:webView];
     self.coverLoadingView.hidden = YES;
     self.isLoadFinishPage = YES;
@@ -364,9 +411,6 @@
     [self.bottomToolbar updateToolBarState:webView];
     [self.searchTopView updateProgressValue:0.0f];
     [self.searchTopView updateWebviewLoading:webView];
-//    if (webView.canGoBack) {
-//        [webView goBack];
-//    }
 }
 
 - (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
@@ -444,6 +488,14 @@
         _fullScrennButton.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.0f];
     }
     return _fullScrennButton;
+}
+
+- (LBNativeView *)nativeADView {
+    if (!_nativeADView) {
+        _nativeADView = [[LBNativeView alloc] init];
+        [_nativeADView configGADNativeAd:nil];
+    }
+    return _nativeADView;
 }
 
 @end

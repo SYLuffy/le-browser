@@ -72,7 +72,7 @@ static LBWebPageTabManager * webManager = nil;
 }
 
 - (void)addNewSerchVC:(nullable LBWebPageTabModel *)fromModel {
-    LBSearchViewController * LBHomeVC = [[LBSearchViewController alloc] initWithStartMode:LBHomeStartModeAddNew fromModel:fromModel];
+    LBSearchViewController * LBHomeVC = [[LBSearchViewController alloc] initWithStartMode:LBHomeStartModeAddNew fromModel:fromModel isAppdelegate:NO];
     [[UIApplication sharedApplication] delegate].window.rootViewController = LBHomeVC;
 }
 

@@ -3,7 +3,14 @@
 
 def app
   pod 'Masonry', '>=1.1.0'
-  pod 'AFNetworking'
+  pod 'Alamofire'
+  pod 'ReachabilitySwift'
+  pod 'Firebase/Analytics'
+  pod 'Firebase/Crashlytics'
+  pod 'Firebase/RemoteConfig'
+  pod 'FBSDKCoreKit'
+  pod 'Google-Mobile-Ads-SDK'
+  pod 'YYModel'
 end
 
 def common

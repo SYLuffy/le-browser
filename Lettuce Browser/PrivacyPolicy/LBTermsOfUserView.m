@@ -6,6 +6,7 @@
 //
 
 #import "LBTermsOfUserView.h"
+#import "Lettuce_Browser-Swift.h"
 
 @interface LBTermsOfUserView ()
 
@@ -21,10 +22,11 @@
     LBTermsOfUserView * popView = [[LBTermsOfUserView alloc] init];
     popView.frame = CGRectMake(0, 0, kLBDeviceWidth, kLBDeviceHeight);
     if (!superView) {
-        [[UIApplication sharedApplication].windows.lastObject addSubview:popView];
+        [[UIApplication sharedApplication].windows.firstObject addSubview:popView];
     }else {
         [superView addSubview:popView];
     }
+    [LBTBALogManager objcLogEventWithName:@"session_start" params:nil];
     return popView;
 }
 

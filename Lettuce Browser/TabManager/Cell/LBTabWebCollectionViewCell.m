@@ -51,7 +51,6 @@
     }];
     
     [self.selectedImgView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.width.mas_equalTo(LBAdapterHeight(164));
         make.height.mas_equalTo(LBAdapterHeight(20));
         make.left.right.bottom.mas_equalTo(self.coverImgView);
     }];
