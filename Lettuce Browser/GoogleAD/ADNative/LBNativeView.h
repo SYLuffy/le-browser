@@ -9,6 +9,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+///原生广告展示视图
 @interface LBNativeView : GADNativeAdView
 
 - (void)configGADNativeAd:(GADNativeAd * _Nullable )nativeAdModel;

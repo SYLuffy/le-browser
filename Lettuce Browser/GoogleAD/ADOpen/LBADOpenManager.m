@@ -15,7 +15,7 @@ NSString * kDismissNotification = @"kDismissNotification";
 static NSTimeInterval const fourHoursInSeconds = 3600 * 4;
 
 @interface LBADOpenManager () <GADFullScreenContentDelegate>
-
+///是否正在加载广告中
 @property (nonatomic, assign) BOOL isLoadingAd;
 @property (nonatomic, strong) NSDate *loadTime;
 @property (nonatomic, strong) GADAppOpenAd * currentShowAD;
@@ -42,6 +42,7 @@ static NSTimeInterval const fourHoursInSeconds = 3600 * 4;
 }
 
 - (void)loadAd {
+    /// 超限处理
     if ([[LBGoogleADUtil shareInstance] isADLimit]) {
         return;
     }

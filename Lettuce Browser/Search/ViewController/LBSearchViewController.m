@@ -186,11 +186,13 @@
 - (void)allEventHandler {
     __weak typeof(self) weakSelf = self;
     
+    /// 推荐金刚位
     self.iconListView.iconClickBlock = ^(NSString * _Nonnull urlString) {
         __strong typeof(weakSelf) strongSelf = weakSelf;
         [strongSelf loadUrlString:urlString];
     };
     
+    /// 底部工具栏
     self.bottomToolbar.toolBarClickBlock = ^(LBToolbarType type) {
         __strong typeof(weakSelf) strongSelf = weakSelf;
         switch (type) {
@@ -221,6 +223,7 @@
         }
     };
     
+    /// 搜索清理按钮
     self.searchTopView.cleanInputBlock = ^{
        __strong typeof(weakSelf) strongSelf = weakSelf;
         if (strongSelf.webView.isLoading) {
@@ -234,8 +237,10 @@
         
     };
     
+    /// 搜索
     self.searchTopView.searchInputBlock = ^(NSString * _Nonnull inputString) {
         __strong typeof(weakSelf) strongSelf = weakSelf;
+        /// 判断是不是网页，不是的话，使用google搜索
         if ([strongSelf verifyWebUrlAddress:inputString]) {
             [strongSelf loadUrlString:inputString];
         }else {
@@ -246,6 +251,8 @@
         }
     };
     
+    /// 搜索框开始编辑、键盘弹出
+    /// 显示一个全屏透明视图，用于点击空白区域收回键盘
     self.searchTopView.textDidBeginEditBlock = ^{
         __strong typeof(weakSelf) strongSelf = weakSelf;
         strongSelf.fullScrennButton.hidden = NO;
@@ -310,6 +317,7 @@
     }
 }
 
+/// 加载url
 - (void)loadUrlString:(NSString *)urlString {
     [self showWebView:YES];
     if (![urlString containsString:@"http"]) {

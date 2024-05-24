@@ -8,7 +8,7 @@
 #import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
-
+/// 隐私政策
 @interface LBPrivacyPolicyView : UIView
 
 + (LBPrivacyPolicyView *)popShowWithSuperView:(nullable UIView *)superView;

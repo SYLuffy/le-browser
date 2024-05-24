@@ -10,7 +10,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 extern NSString * kDismissNotification;
-
+/// 开屏广告管理类
 @interface LBADOpenManager : NSObject
 
 @property (nonatomic, strong, nullable) GADAppOpenAd *appOpenAd;

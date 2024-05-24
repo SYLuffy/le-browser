@@ -11,6 +11,7 @@
 #import <AppTrackingTransparency/AppTrackingTransparency.h>
 #import "LBADOpenManager.h"
 #import <Firebase/Firebase.h>
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
 
 @interface AppDelegate ()
 
@@ -20,7 +21,6 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    
     [FIRApp configure];
     [LBGoogleADUtil shareInstance];
     [LBVpnUtil.shareInstance load:nil];
@@ -33,7 +33,22 @@
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.rootViewController = homeVC;
     [self.window makeKeyAndVisible];
-    return YES;
+    return [[FBSDKApplicationDelegate sharedInstance] application:application
+                                           didFinishLaunchingWithOptions:launchOptions];;
+}
+
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
+    return [[FBSDKApplicationDelegate sharedInstance] application:app openURL:url options:options];
+}
+
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation {
+  return [[FBSDKApplicationDelegate sharedInstance] application:application
+                                                         openURL:url
+                                               sourceApplication:sourceApplication
+                                                      annotation:annotation];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
@@ -42,6 +57,7 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     [self userTraking];
+    [FBSDKAppEvents.shared activateApp];
 }
 - (void)userTraking {
     if (@available(iOS 14, *)) {

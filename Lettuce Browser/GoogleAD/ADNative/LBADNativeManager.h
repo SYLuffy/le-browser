@@ -9,7 +9,7 @@
 #import <GoogleMobileAds/GoogleMobileAds.h>
 
 NS_ASSUME_NONNULL_BEGIN
-
+/// 原生广告 管理类
 @interface LBADNativeManager : NSObject
 
 @property (nonatomic, strong) LBGoogleADModel * homeNativeModel;

@@ -282,6 +282,7 @@
 - (void)jumpResultVc {
     self.isShowConnectAD = YES;
     __weak typeof(self) weakSelf = self;
+    ///插屏广告退出，才跳转结果页
     [LBADInterstitialManager shareInstance].ADDismissBlock = ^{
         __strong typeof(weakSelf) strongSelf = weakSelf;
         LBSmartType type = LBSmartTypeSuccessed;

@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface LBSearchViewController : UIViewController
 
+/// fromModel 代表 已有网页数据
 - (instancetype)initWithStartMode:(LBHomeStartMode)startMode fromModel:(nullable LBWebPageTabModel *)fromModel isAppdelegate:(BOOL)isAppdelegate;
 
 @end

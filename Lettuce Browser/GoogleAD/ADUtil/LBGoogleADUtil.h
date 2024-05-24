@@ -29,6 +29,7 @@ typedef NS_ENUM(NSUInteger, LBADShowLocation) {
 
 + (instancetype)shareInstance;
 
+/// 枚举转换字符串
 - (NSString *)getPositionKeyWith:(LBADPosition)position;
 
 /// 广告点击一次，次数 + 1
