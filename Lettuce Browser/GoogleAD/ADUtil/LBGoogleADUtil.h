@@ -27,6 +27,9 @@ typedef NS_ENUM(NSUInteger, LBADShowLocation) {
 
 @interface LBGoogleADUtil : GADNativeAdView
 
+/// 是否使用广告AB缓存策略
+@property (nonatomic, assign) BOOL isCanADABTactics;
+
 + (instancetype)shareInstance;
 
 /// 枚举转换字符串

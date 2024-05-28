@@ -8,6 +8,7 @@
 #ifndef LBPrefixHeader_pch
 #define LBPrefixHeader_pch
 
+#import "LBAppUtil.h"
 #import <Masonry/Masonry.h>
 #import <YYModel/YYModel.h>
 #import "LBGoogleADConfigModel.h"

@@ -54,7 +54,7 @@ public struct LBCloakRequest {
         params["quart"] = UIDevice.current.identifierForVendor?.uuidString
         params["aircraft"] = ""
         params["bout"] = ""
-        params["pinscher"] = "talcum"
+        params["pinscher"] = "proto"
         params["sincere"] =  ASIdentifierManager.shared().advertisingIdentifier.uuidString
         params["gizzard"] = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
         
