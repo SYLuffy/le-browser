@@ -190,7 +190,8 @@
                 }
                 ///tba 价值回传
                 ADBaseModel * adBaseModel = [[ADBaseModel alloc] init];
-                [adBaseModel objcInit:price
+                [adBaseModel objcInit:strongSelf.homeNativeModel.key
+                                     :price
                                      :currencyCode
                                      :strongSelf.lastHomeNativeAd.responseInfo.loadedAdNetworkResponseInfo.adNetworkClassName?strongSelf.lastHomeNativeAd.responseInfo.loadedAdNetworkResponseInfo.adNetworkClassName:@""
                                      :@""
@@ -222,7 +223,8 @@
                 }
                 ///tba 价值回传
                 ADBaseModel * adBaseModel = [[ADBaseModel alloc] init];
-                [adBaseModel objcInit:price
+                [adBaseModel objcInit:strongSelf.resultNativeModel.key
+                                     :price
                                      :currencyCode
                                      :strongSelf.lastResultNativeAd.responseInfo.loadedAdNetworkResponseInfo.adNetworkClassName?strongSelf.lastResultNativeAd.responseInfo.loadedAdNetworkResponseInfo.adNetworkClassName:@""
                                      :@""

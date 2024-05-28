@@ -147,7 +147,8 @@ static NSTimeInterval const fourHoursInSeconds = 3600 * 4;
         }
         ///tba 价值回传
         ADBaseModel * adBaseModel = [[ADBaseModel alloc] init];
-        [adBaseModel objcInit:price
+        [adBaseModel objcInit:strongSelf.adModel.key
+                             :price
                              :currencyCode
                              :strongSelf.currentShowAD.responseInfo.loadedAdNetworkResponseInfo.adNetworkClassName?strongSelf.currentShowAD.responseInfo.loadedAdNetworkResponseInfo.adNetworkClassName:@""
                              :@""
