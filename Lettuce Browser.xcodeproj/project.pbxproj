@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F4D5790A0F344459B8B98AD1 /* LBVPNGuideView.m in Sources */ = {isa = PBXBuildFile; fileRef = F4D5790A0F344459B8B98AD3 /* LBVPNGuideView.m */; };
 		195834572BBCEC6F00078C6C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 195834562BBCEC6F00078C6C /* AppDelegate.m */; };
 		195834602BBCEC6F00078C6C /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 1958345F2BBCEC6F00078C6C /* Base */; };
 		195834622BBCEC7100078C6C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 195834612BBCEC7100078C6C /* Assets.xcassets */; };
@@ -149,6 +150,8 @@
 		19A25F8D2BC56CDC00030139 /* LBVPNAlerNotiView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LBVPNAlerNotiView.m; sourceTree = "<group>"; };
 		19A25F8F2BC57A6300030139 /* LBVPNEntranceView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LBVPNEntranceView.h; sourceTree = "<group>"; };
 		19A25F902BC57A6300030139 /* LBVPNEntranceView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LBVPNEntranceView.m; sourceTree = "<group>"; };
+		F4D5790A0F344459B8B98AD2 /* LBVPNGuideView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LBVPNGuideView.h; sourceTree = "<group>"; };
+		F4D5790A0F344459B8B98AD3 /* LBVPNGuideView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LBVPNGuideView.m; sourceTree = "<group>"; };
 		19A416B42BC7CCB700F70DA2 /* LBVpnUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LBVpnUtil.h; sourceTree = "<group>"; };
 		19A416B52BC7CCB700F70DA2 /* LBVpnUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LBVpnUtil.m; sourceTree = "<group>"; };
 		19A416B72BC7CE4800F70DA2 /* Shadowsocks.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Shadowsocks.h; sourceTree = "<group>"; };
@@ -464,6 +467,7 @@
 		19AE576F2BBD4B0100422E01 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				F4D5790A0F344459B8B98AD0 /* Guide */,
 				19AE577A2BC269F700422E01 /* Clean */,
 				19AE57762BC23A1900422E01 /* Alert */,
 				EB5330F52BC045BA009C172F /* Cell */,
@@ -490,6 +494,15 @@
 				19A25F8D2BC56CDC00030139 /* LBVPNAlerNotiView.m */,
 			);
 			path = Alert;
+			sourceTree = "<group>";
+		};
+		F4D5790A0F344459B8B98AD0 /* Guide */ = {
+			isa = PBXGroup;
+			children = (
+				F4D5790A0F344459B8B98AD2 /* LBVPNGuideView.h */,
+				F4D5790A0F344459B8B98AD3 /* LBVPNGuideView.m */,
+			);
+			path = Guide;
 			sourceTree = "<group>";
 		};
 		19AE577A2BC269F700422E01 /* Clean */ = {
@@ -1019,6 +1032,7 @@
 				19C226102BF60B64008E9B94 /* LBADInterstitialManager.m in Sources */,
 				195834772BBCF83E00078C6C /* LBScreenAdapter.m in Sources */,
 				19AE578C2BC2747700422E01 /* LBPrivacyPolicyView.m in Sources */,
+				F4D5790A0F344459B8B98AD1 /* LBVPNGuideView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

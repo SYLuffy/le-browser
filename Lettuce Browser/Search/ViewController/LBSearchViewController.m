@@ -17,6 +17,8 @@
 #import "LBVPNEntranceView.h"
 #import "LBVpnUtil.h"
 #import "LBNativeView.h"
+#import "LBVPNGuideView.h"
+#import "LBVpnViewController.h"
 #import "Lettuce_Browser-Swift.h"
 
 @interface LBSearchViewController () <WKNavigationDelegate, WKUIDelegate>
@@ -91,6 +93,7 @@
         [LBBootLoadingView showLoadingMode:LBLoadingModeColdBoot superView:self.view];
     }
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateNativeAd) name:kDismissNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showVPNGuideIfNeeded) name:kLBBootLoadingDidFinishForGuideNotification object:nil];
 }
 
 - (void)initializeAppearance {
@@ -180,6 +183,23 @@
             [strongSelf.nativeADView configGADNativeAd:nativeAD];
         }];
     }
+}
+
+- (void)showVPNGuideIfNeeded {
+    if ([LBVPNGuideView hasShownGuide]) {
+        return;
+    }
+    [self.view layoutIfNeeded];
+    CGRect vpnFrameInView = [self.vpnEntranceView convertRect:self.vpnEntranceView.bounds toView:self.view];
+    __weak typeof(self) weakSelf = self;
+    [LBVPNGuideView showGuideOnView:self.view vpnEntranceFrame:vpnFrameInView completion:^(BOOL didTapTryNow) {
+        if (didTapTryNow) {
+            __strong typeof(weakSelf) strongSelf = weakSelf;
+            LBVpnViewController *vpnVC = [[LBVpnViewController alloc] initWithNeedStartConnect:YES];
+            vpnVC.modalPresentationStyle = UIModalPresentationFullScreen;
+            [strongSelf presentViewController:vpnVC animated:YES completion:nil];
+        }
+    }];
 }
 
 /// 处理各个模块的事件回调

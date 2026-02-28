@@ -7,6 +7,8 @@
 
 #import <UIKit/UIKit.h>
 
+extern NSString * const kLBBootLoadingDidFinishForGuideNotification;
+
 NS_ASSUME_NONNULL_BEGIN
 
 typedef NS_ENUM(NSUInteger, LBLoadingMode) {

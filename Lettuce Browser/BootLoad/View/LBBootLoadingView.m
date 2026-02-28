@@ -8,10 +8,13 @@
 #import "LBBootLoadingView.h"
 #import "LBBootProgressView.h"
 #import "LBVPNAlerNotiView.h"
+#import "LBVPNGuideView.h"
 #import "LBSmartServerResultViewController.h"
 #import "LBVpnViewController.h"
 #import "LBADOpenManager.h"
 #import "Lettuce_Browser-Swift.h"
+
+NSString * const kLBBootLoadingDidFinishForGuideNotification = @"kLBBootLoadingDidFinishForGuideNotification";
 
 @interface LBBootLoadingView ()
 
@@ -173,7 +176,11 @@
         [weakSelf removeFromSuperview];
         if (weakSelf.loadingMode == LBLoadingModeColdBoot) {
             if ([LBVpnUtil shareInstance].vpnState != LBVpnStateConnected) {
-                [LBVPNAlerNotiView showWithSuperView:nil];
+                if (![LBVPNGuideView hasShownGuide]) {
+                    [[NSNotificationCenter defaultCenter] postNotificationName:kLBBootLoadingDidFinishForGuideNotification object:nil];
+                } else {
+                    [LBVPNAlerNotiView showWithSuperView:nil];
+                }
             } else {
                 NSDate * connectedDate = [[LBVpnUtil shareInstance] getCurrentConnectedTime];
                 if (connectedDate) {
